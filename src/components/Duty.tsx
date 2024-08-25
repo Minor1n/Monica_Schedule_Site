@@ -1,24 +1,25 @@
 import React from 'react';
-import {fetchAndUpdate, userId} from "../App";
+import {fetchAndUpdate} from "../App";
 import {api} from "../index";
+import TelegramWebApp from "../hooks/TelegramWebApp";
 
 let dutyPage = 0
 
-function changeDutyPage(i:number) {
-    if (dutyPage+i < 0) return alert(`Дежурства не найдены!`);
-    const newPage = dutyPage+i
-    fetchAndUpdate(`duty/table?user=${userId}&page=${newPage}`, {elementId:"duty"})
-    dutyPage = newPage
-}
-
-async function dutyCheckIn(){
-    const response = await fetch(`${api}/duty/checkin?user=${userId}`)
-    const data = await response.json();
-    alert(data.alert)
-    await fetchAndUpdate(`duty/table?user=${userId}&page=${dutyPage}`, {elementId:"duty"})
-}
-
 const Duty = () => {
+    const userId = TelegramWebApp()
+    function changeDutyPage(i:number) {
+        if (dutyPage+i < 0) return alert(`Дежурства не найдены!`);
+        const newPage = dutyPage+i
+        fetchAndUpdate(`duty/table?user=${userId}&page=${newPage}`, {elementId:"duty"})
+        dutyPage = newPage
+    }
+
+    async function dutyCheckIn(){
+        const response = await fetch(`${api}/duty/checkin?user=${userId}`)
+        const data = await response.json();
+        alert(data.alert)
+        await fetchAndUpdate(`duty/table?user=${userId}&page=${dutyPage}`, {elementId:"duty"})
+    }
     changeDutyPage(0)
     const dutyIncrement = ()=>{
         changeDutyPage(1)

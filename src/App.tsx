@@ -7,18 +7,6 @@ import React, {useEffect, useState} from "react";
 import Settings from "./components/Settings";
 import Duty from "./components/Duty";
 
-export let userId:string|undefined;
-
-export const updateBackground = async () => {
-    try {
-        const response = await fetch(`${api}/gradient?user=${userId}`);
-        if (!response.ok) return new Error('Network response was not ok');
-        const data = await response.json();
-        document.body.style.backgroundImage = data.gradient;
-    } catch (error) {
-        console.error('Ошибка при обновлении фона:', error);
-    }
-};
 
 export const fetchAndUpdate = async (url: string, options?:{elementId?: string, page?: string}) => {
     try {
@@ -40,7 +28,17 @@ export const fetchAndUpdate = async (url: string, options?:{elementId?: string, 
 };
 
 function App() {
-    userId = TelegramWebApp()
+    const userId = TelegramWebApp()
+    const updateBackground = async () => {
+        try {
+            const response = await fetch(`${api}/gradient?user=${userId}`);
+            if (!response.ok) return new Error('Network response was not ok');
+            const data = await response.json();
+            document.body.style.backgroundImage = data.gradient;
+        } catch (error) {
+            console.error('Ошибка при обновлении фона:', error);
+        }
+    };
     useEffect(()=>{
         updateBackground()
     },[])

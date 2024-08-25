@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {userId} from "../App";
 import {api} from "../index";
+import TelegramWebApp from "../hooks/TelegramWebApp";
 
 const bells = new Map<'on' | 'off', string>([
     ['off','/images/bellMute.svg'],
@@ -22,19 +22,9 @@ interface ITheme{
     lightMode:0|1
 }
 
-export const updateBackground = async () => {
-    try {
-        const response = await fetch(`${api}/gradient?user=${userId}`);
-        if (!response.ok) return new Error('Network response was not ok');
-        const data = await response.json();
-        document.body.style.backgroundImage = data.gradient;
-    } catch (error) {
-        console.error('Ошибка при обновлении фона:', error);
-    }
-};
-
 
 const Settings = () => {
+    const userId = TelegramWebApp()
     const [notifications, setNotifications] = useState<INotifications>({
         duty:'on',
         replacement:'on',
@@ -44,6 +34,16 @@ const Settings = () => {
         lightMode:0
     })
 
+    const updateBackground = async () => {
+        try {
+            const response = await fetch(`${api}/gradient?user=${userId}`);
+            if (!response.ok) return new Error('Network response was not ok');
+            const data = await response.json();
+            document.body.style.backgroundImage = data.gradient;
+        } catch (error) {
+            console.error('Ошибка при обновлении фона:', error);
+        }
+    };
     const setNotificationsF = async ():Promise<void> =>{
         const response = await fetch(`${api}/settings/notifications/table?user=${userId}`)
         const data:INotifications = await response.json()
