@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {api} from "../index";
-import TelegramWebApp from "../hooks/TelegramWebApp";
+import {api,userId} from "../index";
 
 interface IUser{
     name:string
@@ -16,7 +15,6 @@ interface IUser{
 
 
 const Profile = () => {
-    const userId = TelegramWebApp()
     const [user, setUser] = useState<IUser>();
     const setUserF = async ():Promise<void> =>{
         const response = await fetch(`${api}/profile/info/table?user=${userId}`)

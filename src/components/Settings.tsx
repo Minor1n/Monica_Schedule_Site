@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {api} from "../index";
-import TelegramWebApp from "../hooks/TelegramWebApp";
+import {api,userId} from "../index";
 
 const bells = new Map<'on' | 'off', string>([
     ['off','/images/bellMute.svg'],
@@ -24,7 +23,6 @@ interface ITheme{
 
 
 const Settings = () => {
-    const userId = TelegramWebApp()
     const [notifications, setNotifications] = useState<INotifications>({
         duty:'on',
         replacement:'on',

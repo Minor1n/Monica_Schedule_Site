@@ -1,12 +1,10 @@
 import React from 'react';
 import {fetchAndUpdate} from "../App";
-import {api} from "../index";
-import TelegramWebApp from "../hooks/TelegramWebApp";
+import {api,userId} from "../index";
 
 let dutyPage = 0
 
 const Duty = () => {
-    const userId = TelegramWebApp()
     function changeDutyPage(i:number) {
         if (dutyPage+i < 0) return alert(`Дежурства не найдены!`);
         const newPage = dutyPage+i

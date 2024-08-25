@@ -1,6 +1,5 @@
 import './styles/main.css'
-import {api} from "./index";
-import TelegramWebApp from "./hooks/TelegramWebApp";
+import {api, userId} from "./index";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import React, {useEffect, useState} from "react";
@@ -28,7 +27,6 @@ export const fetchAndUpdate = async (url: string, options?:{elementId?: string, 
 };
 
 function App() {
-    const userId = TelegramWebApp()
     const updateBackground = async () => {
         try {
             const response = await fetch(`${api}/gradient?user=${userId}`);

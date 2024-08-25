@@ -1,7 +1,6 @@
 import React from 'react';
 import {fetchAndUpdate} from "../App";
-import {api} from "../index";
-import TelegramWebApp from "../hooks/TelegramWebApp";
+import {api,userId} from "../index";
 
 interface ReplacementData {
     table: string;
@@ -43,7 +42,6 @@ const replacementPageDecrement =()=>{
 }
 
 const Home = () => {
-    const userId = TelegramWebApp()
     changeReplacementPage(0)
     fetchAndUpdate(`home/schedule/table?user=${userId}`, {elementId:"schedule"})
     fetchAndUpdate(`home/schedule/select?user=${userId}`, {elementId:"selectGroup"})
