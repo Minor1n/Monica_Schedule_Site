@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 import Settings from "./components/Settings";
 import Duty from "./components/Duty";
 
-export let userId:string;
+export let userId:string|undefined;
 
 export const updateBackground = async () => {
     try {
@@ -56,9 +56,6 @@ function App() {
     };
     const duty = async () => {
         setPage(<Duty/>)
-        // await Promise.all([
-        //     fetchAndUpdate(`duty/table?user=${userId}&page=${dutyPage}`, {elementId:"duty"})
-        // ]);
     };
     return (
         <div className='fill'>

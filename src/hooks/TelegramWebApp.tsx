@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 type TelegramUser = string
 
-const TelegramWebApp = ():string => {
-    const [user, setUser] = useState<TelegramUser>('6018898378');
+const TelegramWebApp = ():string|undefined => {
+    const [user, setUser] = useState<TelegramUser>();
 
     useEffect(() => {
         const tgScript = document.createElement('script');
