@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(
 );
 
 const initData = initInitData();
-export const api = 'http://104.249.40.163:5000'
+export const api = 'https://api.minorin.ru'
 export const userId = initData?.user?.id
 
 
