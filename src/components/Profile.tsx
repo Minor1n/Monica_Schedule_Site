@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {api,userId} from "../index";
+import LoadingScreen from "./LoadingScreen";
 
 interface IUser{
     name:string
@@ -15,23 +16,14 @@ interface IUser{
 
 
 const Profile = () => {
+    const [isRendered, setIsRendered] = useState(false);
     const [user, setUser] = useState<IUser>();
+
     const setUserF = async ():Promise<void> =>{
         const response = await fetch(`${api}/profile/info/table?user=${userId}`)
-        const user:IUser = await response.json()
-        const dutySelector = document.getElementById('selectDutyDay')
-        if (dutySelector&&user) {
-            dutySelector.innerHTML = user.dutyDayOptions
-        }
-        const groupsSelector = document.getElementById('selectGroup')
-        if (groupsSelector&&user) {
-            groupsSelector.innerHTML = user.groupOptions
-        }
-        setUser(user)
+        const data:IUser = await response.json()
+        setUser(data)
     }
-    useEffect(()=> {
-        setUserF()
-    },[])
     const update = async () => {
         const group = (document.getElementById('selectGroup') as HTMLSelectElement).value;
         const dutyDay = (document.getElementById('selectDutyDay') as HTMLSelectElement).value;
@@ -70,6 +62,13 @@ const Profile = () => {
         await setUserF()
     };
 
+    useLayoutEffect(() => {
+        setUserF().then(()=>setIsRendered(true))
+    }, []);
+
+    if(!isRendered){
+        return (<LoadingScreen/>)
+    }
     return (
         <div>
             <table>
@@ -94,7 +93,7 @@ const Profile = () => {
                             <form name="myForm" className='form'>
                                 <img src="/images/pen.svg" alt="pen" className='pen'/>
                                 <span>
-                            <select name="selectGroup" id="selectGroup"></select>
+                            <select dangerouslySetInnerHTML={{__html: String(user?.groupOptions)}} name="selectGroup" id="selectGroup"/>
                         </span>
                             </form>
                         </b>
@@ -122,8 +121,8 @@ const Profile = () => {
                             <form name="myForm1" className='form'>
                                 <img src="/images/pen.svg" alt="pen" className='pen'/>
                                 <span>
-                            <select name="selectDutyDay" id="selectDutyDay"></select>
-                        </span>
+                                    <select dangerouslySetInnerHTML={{__html: String(user?.dutyDayOptions)}} name="selectDutyDay" id="selectDutyDay"/>
+                                </span>
                             </form>
                         </b>
                     </td>

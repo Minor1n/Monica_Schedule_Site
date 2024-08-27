@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {api,userId} from "../index";
+import LoadingScreen from "./LoadingScreen";
 
 const bells = new Map<'on' | 'off', string>([
     ['off','/images/bellMute.svg'],
@@ -23,6 +24,7 @@ interface ITheme{
 
 
 const Settings = () => {
+    const [isRendered, setIsRendered] = useState(false);
     const [notifications, setNotifications] = useState<INotifications>({
         duty:'on',
         replacement:'on',
@@ -32,30 +34,21 @@ const Settings = () => {
         lightMode:0
     })
 
-    const updateBackground = async () => {
-        try {
-            const response = await fetch(`${api}/gradient?user=${userId}`);
-            if (!response.ok) return new Error('Network response was not ok');
-            const data = await response.json();
-            document.body.style.backgroundImage = data.gradient;
-        } catch (error) {
-            console.error('Ошибка при обновлении фона:', error);
-        }
-    };
-    const setNotificationsF = async ():Promise<void> =>{
+    const load = async () => {
         const response = await fetch(`${api}/settings/notifications/table?user=${userId}`)
+        const response2 = await fetch(`${api}/settings/theme/table?user=${userId}`)
         const data:INotifications = await response.json()
+        const data2:ITheme = await response2.json()
         setNotifications(data)
+        setTheme(data2)
     }
-    const setThemeF = async ():Promise<void> =>{
-        const response = await fetch(`${api}/settings/theme/table?user=${userId}`)
-        const data:ITheme = await response.json()
-        setTheme(data)
-    }
-    useEffect(()=> {
-        setNotificationsF()
-        setThemeF()
-    },[])
+
+    const updateBackground = async () => {
+        const response = await fetch(`${api}/gradient?user=${userId}`);
+        if (!response.ok) return new Error('Network response was not ok');
+        const data = await response.json();
+        document.body.style.backgroundImage = data.gradient;
+    };
 
     async function updateSettingsNotificationSchedule() {
         await fetch(`${api}/settings/notifications/schedule?user=${userId}`)
@@ -86,10 +79,10 @@ const Settings = () => {
 
     async function updateSettingsThemeLightMode() {
         await fetch(`${api}/settings/theme/lightMode?user=${userId}`, {method: 'POST'})
+        await updateBackground()
         setTheme({
             lightMode: theme.lightMode === 0 ? 1 : 0
         })
-        await updateBackground()
     }
 
     async function updateSettingsThemeCustom() {
@@ -105,6 +98,13 @@ const Settings = () => {
         await updateBackground()
     }
 
+    useLayoutEffect(() => {
+        load().then(()=>setIsRendered(true))
+    }, []);
+
+    if(!isRendered){
+        return (<LoadingScreen/>)
+    }
     return (
 <div>
     <table>

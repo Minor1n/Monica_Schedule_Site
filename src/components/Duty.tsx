@@ -1,29 +1,42 @@
-import React from 'react';
-import {fetchAndUpdate} from "../App";
+import React, {useLayoutEffect, useState} from 'react';
 import {api,userId} from "../index";
+import LoadingScreen from "./LoadingScreen";
 
 let dutyPage = 0
 
 const Duty = () => {
-    function changeDutyPage(i:number) {
-        if (dutyPage+i < 0) return alert(`Дежурства не найдены!`);
-        const newPage = dutyPage+i
-        fetchAndUpdate(`duty/table?user=${userId}&page=${newPage}`, {elementId:"duty"})
-        dutyPage = newPage
+    const [isRendered, setIsRendered] = useState(false);
+    const [table, setTable] = useState<string>('')
+
+    const load = async ()=>{
+        const response = await fetch(`${api}/duty/table?user=${userId}&page=${dutyPage}`)
+        const data:{table:string} = await response.json()
+        setTable(data.table)
     }
 
-    async function dutyCheckIn(){
+    const dutyCheckIn = async () => {
         const response = await fetch(`${api}/duty/checkin?user=${userId}`)
         const data = await response.json();
         alert(data.alert)
-        await fetchAndUpdate(`duty/table?user=${userId}&page=${dutyPage}`, {elementId:"duty"})
+        await load()
     }
-    changeDutyPage(0)
-    const dutyIncrement = ()=>{
-        changeDutyPage(1)
+
+    const dutyIncrement = async ()=>{
+        dutyPage += 1
+        await load()
     }
-    const dutyDecrement = ()=>{
-        changeDutyPage(-1)
+    const dutyDecrement = async ()=>{
+        if (dutyPage-1 < 0) return alert(`Дежурства не найдены!`);
+        dutyPage -= 1
+        await load()
+    }
+
+    useLayoutEffect(() => {
+        load().then(()=>setIsRendered(true))
+    }, []);
+
+    if(!isRendered){
+        return (<LoadingScreen/>)
     }
     return (
         <div>
@@ -45,7 +58,7 @@ const Duty = () => {
                 </tr>
                 </tbody>
             </table>
-            <div id="duty"></div>
+            <table dangerouslySetInnerHTML={{__html: table}}/>
             <div className="buf"></div>
             <nav className="mobile-nav dutyButton">
                 <button onClick={dutyCheckIn} className="bloc-icon">
