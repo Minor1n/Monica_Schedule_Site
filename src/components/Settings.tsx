@@ -86,7 +86,8 @@ const Settings = () => {
     }
 
     async function updateSettingsThemeCustom() {
-        const inputElement = document.querySelector("input") as HTMLInputElement | null;
+        const inputElement = document.getElementById('theme') as HTMLSelectElement
+        console.log(inputElement?.value)
         const url = inputElement ? inputElement.value : 'standard'
         await fetch(`${api}/settings/theme/background?user=${userId}&url=${url}`, {method: 'POST'})
         await updateBackground()

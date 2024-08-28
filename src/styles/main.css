@@ -172,3 +172,12 @@ form {
         transform: rotate(360deg);
     }
 }
+.hidden {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    position: absolute;
+}

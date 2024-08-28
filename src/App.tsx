@@ -10,7 +10,10 @@ import LoadingScreen from "./components/LoadingScreen";
 
 const App = () => {
     const [isRendered, setIsRendered] = useState(false);
-    const [page, setPage] = useState<React.JSX.Element>(<Home/>);
+    const [homeS, setHomeS] = useState('visible')
+    const [dutyS, setDutyS] = useState('hidden')
+    const [profileS, setProfileS] = useState('hidden')
+    const [settingsS, setSettingsS] = useState('hidden')
 
     const load = async ()=>{
         const response = await fetch(`${api}/gradient?user=${userId}`)
@@ -19,16 +22,28 @@ const App = () => {
     }
 
     const profile = async () => {
-        setPage(<Profile/>)
+        setHomeS('hidden')
+        setDutyS('hidden')
+        setSettingsS('hidden')
+        setProfileS('visible')
     };
     const home = () => {
-        setPage(<Home/>)
+        setDutyS('hidden')
+        setSettingsS('hidden')
+        setProfileS('hidden')
+        setHomeS('visible')
     };
     const settings = async () => {
-        setPage(<Settings/>)
+        setHomeS('hidden')
+        setDutyS('hidden')
+        setProfileS('hidden')
+        setSettingsS('visible')
     };
     const duty = async () => {
-        setPage(<Duty/>)
+        setHomeS('hidden')
+        setSettingsS('hidden')
+        setProfileS('hidden')
+        setDutyS('visible')
     };
 
     useLayoutEffect(() => {
@@ -39,7 +54,11 @@ const App = () => {
     }
     return (
         <div className='fill'>
-            {page}
+            <div className={homeS}><Home/></div>
+            <div className={dutyS}><Duty/></div>
+            <div className={profileS}><Profile/></div>
+            <div className={settingsS}><Settings/></div>
+
             <div className="buf"></div>
             <nav className="mobile-nav">
                 <button onClick={home} className="bloc-icon">

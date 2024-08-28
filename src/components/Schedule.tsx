@@ -17,7 +17,7 @@ const Schedule = () => {
     }
 
     const changeSchedule = () => {
-        const selectedValue = (document.getElementById('selectGroup') as HTMLSelectElement).value;
+        const selectedValue = (document.getElementById('selectGroupSchedule') as HTMLSelectElement).value;
         fetch(`${api}/home/schedule/update?group=${selectedValue}`).then(response=>{
             response.json().then((data:{table:string})=>{
                 setTable(data.table)
@@ -41,7 +41,7 @@ const Schedule = () => {
                     <td className="title">
                         <b>Расписание</b>
                         <form name="myForm">
-                            <select dangerouslySetInnerHTML={{__html: select}} onChange={changeSchedule} name="selectGroup" id="selectGroup"/>
+                            <select dangerouslySetInnerHTML={{__html: select}} onChange={changeSchedule} name="selectGroupSchedule" id="selectGroupSchedule"/>
                         </form>
                     </td>
                 </tr>
