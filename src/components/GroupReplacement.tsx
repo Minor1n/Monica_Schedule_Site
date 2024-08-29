@@ -24,6 +24,7 @@ const GroupReplacement = () => {
         <div>
             <table>
                 <tbody>
+                <tr className="line"></tr>
                 <tr>
                     <td className="title"><b>Замены</b></td>
                 </tr>

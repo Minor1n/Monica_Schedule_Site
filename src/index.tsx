@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { initInitData } from '@telegram-apps/sdk';
+// import { initInitData } from '@telegram-apps/sdk';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-const initData = initInitData();
+//
+// const initData = initInitData();
 export const api = 'https://api.minorin.ru'
-export const userId = initData?.user?.id
+export const userId = 1693247078
 
 
 root.render(

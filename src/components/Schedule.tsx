@@ -36,7 +36,6 @@ const Schedule = () => {
         <div>
             <table>
                 <tbody>
-                <tr className="line"></tr>
                 <tr>
                     <td className="title">
                         <b>Расписание</b>

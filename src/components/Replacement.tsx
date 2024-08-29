@@ -46,6 +46,7 @@ const Replacement = () => {
         <div>
             <table>
                 <tbody>
+                <tr className="line"></tr>
                 <tr>
                     <td>
                         <button onClick={replacementPageIncrement} className="arrow">
