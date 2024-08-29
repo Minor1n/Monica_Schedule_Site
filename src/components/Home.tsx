@@ -1,13 +1,13 @@
 import React from 'react';
-import Replacement from "./Replacement";
 import Schedule from "./Schedule";
+import GroupReplacement from "./GroupReplacement";
 
 
 const Home = () => {
     return (
         <div>
+            <GroupReplacement/>
             <Schedule/>
-            <Replacement/>
         </div>
     );
 };

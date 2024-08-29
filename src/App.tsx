@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import Duty from "./components/Duty";
 import LoadingScreen from "./components/LoadingScreen";
+import Replacement from "./components/Replacement";
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
     const [dutyS, setDutyS] = useState('hidden')
     const [profileS, setProfileS] = useState('hidden')
     const [settingsS, setSettingsS] = useState('hidden')
+    const [replacementS, setReplacementS] = useState('hidden')
 
     const load = async ()=>{
         const response = await fetch(`${api}/gradient?user=${userId}`)
@@ -25,25 +27,36 @@ const App = () => {
         setHomeS('hidden')
         setDutyS('hidden')
         setSettingsS('hidden')
+        setReplacementS('hidden')
         setProfileS('visible')
     };
     const home = () => {
         setDutyS('hidden')
         setSettingsS('hidden')
         setProfileS('hidden')
+        setReplacementS('hidden')
         setHomeS('visible')
     };
     const settings = async () => {
         setHomeS('hidden')
         setDutyS('hidden')
         setProfileS('hidden')
+        setReplacementS('hidden')
         setSettingsS('visible')
     };
     const duty = async () => {
         setHomeS('hidden')
         setSettingsS('hidden')
         setProfileS('hidden')
+        setReplacementS('hidden')
         setDutyS('visible')
+    };
+    const replacement = async () => {
+        setHomeS('hidden')
+        setSettingsS('hidden')
+        setProfileS('hidden')
+        setDutyS('hidden')
+        setReplacementS('visible')
     };
 
     useLayoutEffect(() => {
@@ -58,11 +71,14 @@ const App = () => {
             <div className={dutyS}><Duty/></div>
             <div className={profileS}><Profile/></div>
             <div className={settingsS}><Settings/></div>
-
+            <div className={replacementS}><Replacement/></div>
             <div className="buf"></div>
             <nav className="mobile-nav">
                 <button onClick={home} className="bloc-icon">
                     <img src="/images/home.svg" alt="home"/>
+                </button>
+                <button onClick={replacement} className="bloc-icon">
+                    <img src="/images/replacement.svg" alt="replacement"/>
                 </button>
                 <button onClick={duty} className="bloc-icon">
                     <img src="/images/duty.svg" alt="duty" className='widthTen'/>
