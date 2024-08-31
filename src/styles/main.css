@@ -133,7 +133,6 @@ form {
 
 .fiveWidth{
     width: 5vw;
-    height: auto;
 }
 .minWidthTen{
     min-width: 10vw
@@ -148,10 +147,11 @@ form {
 
 .loading-screen {
     display: flex;
+    position: fixed;
+    top:0;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0);
     height: 100vh;
 }
 

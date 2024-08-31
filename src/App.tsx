@@ -10,12 +10,12 @@ import Replacement from "./components/Replacement";
 
 
 const App = () => {
-    const [isRendered, setIsRendered] = useState(false);
-    const [homeS, setHomeS] = useState('visible')
-    const [dutyS, setDutyS] = useState('hidden')
-    const [profileS, setProfileS] = useState('hidden')
-    const [settingsS, setSettingsS] = useState('hidden')
-    const [replacementS, setReplacementS] = useState('hidden')
+    const [isRendered, setIsRendered] = useState<boolean>(false);
+    const [visibleSection, setVisibleSection] = useState<string>('home');
+
+    const showSection = (section: string) => {
+        setVisibleSection(section);
+    };
 
     const load = async ()=>{
         const response = await fetch(`${api}/gradient?user=${userId}`)
@@ -23,70 +23,35 @@ const App = () => {
         document.body.style.backgroundImage = data.gradient;
     }
 
-    const profile = async () => {
-        setHomeS('hidden')
-        setDutyS('hidden')
-        setSettingsS('hidden')
-        setReplacementS('hidden')
-        setProfileS('visible')
-    };
-    const home = () => {
-        setDutyS('hidden')
-        setSettingsS('hidden')
-        setProfileS('hidden')
-        setReplacementS('hidden')
-        setHomeS('visible')
-    };
-    const settings = async () => {
-        setHomeS('hidden')
-        setDutyS('hidden')
-        setProfileS('hidden')
-        setReplacementS('hidden')
-        setSettingsS('visible')
-    };
-    const duty = async () => {
-        setHomeS('hidden')
-        setSettingsS('hidden')
-        setProfileS('hidden')
-        setReplacementS('hidden')
-        setDutyS('visible')
-    };
-    const replacement = async () => {
-        setHomeS('hidden')
-        setSettingsS('hidden')
-        setProfileS('hidden')
-        setDutyS('hidden')
-        setReplacementS('visible')
-    };
-
     useLayoutEffect(() => {
         load().then(()=> setIsRendered(true))
     }, []);
+
     if (!isRendered) {
         return (<LoadingScreen/>);
     }
     return (
         <div className='fill'>
-            <div className={homeS}><Home/></div>
-            <div className={dutyS}><Duty/></div>
-            <div className={profileS}><Profile/></div>
-            <div className={settingsS}><Settings/></div>
-            <div className={replacementS}><Replacement/></div>
+            <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><Home/></div>
+            <div className={visibleSection === 'replacement' ? 'visible' : 'hidden'}><Replacement/></div>
+            <div className={visibleSection === 'duty' ? 'visible' : 'hidden'}><Duty/></div>
+            <div className={visibleSection === 'profile' ? 'visible' : 'hidden'}><Profile/></div>
+            <div className={visibleSection === 'settings' ? 'visible' : 'hidden'}><Settings/></div>
             <div className="buf"></div>
             <nav className="mobile-nav">
-                <button onClick={home} className="bloc-icon">
+                <button onClick={() => showSection('home')} className="bloc-icon">
                     <img src="/images/home.svg" alt="home"/>
                 </button>
-                <button onClick={replacement} className="bloc-icon">
+                <button onClick={() => showSection('replacement')} className="bloc-icon">
                     <img src="/images/replacement.svg" alt="replacement"/>
                 </button>
-                <button onClick={duty} className="bloc-icon">
+                <button onClick={() => showSection('duty')} className="bloc-icon">
                     <img src="/images/duty.svg" alt="duty" className='widthTen'/>
                 </button>
-                <button onClick={profile} className="bloc-icon">
+                <button onClick={() => showSection('profile')} className="bloc-icon">
                     <img src="/images/profile.svg" alt="profile"/>
                 </button>
-                <button onClick={settings} className="bloc-icon">
+                <button onClick={() => showSection('settings')} className="bloc-icon">
                     <img src="/images/settings.svg" alt="home"/>
                 </button>
             </nav>
