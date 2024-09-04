@@ -59,6 +59,10 @@ const Profile = () => {
         await setUserF()
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        e.preventDefault();
+    }
+
     useLayoutEffect(() => {
         setUserF().then(()=>setIsRendered(true))
     }, []);
@@ -95,7 +99,7 @@ const Profile = () => {
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
-                    <input className="inputP" type="text" id="nameUpdate" name="nameUpdate" onKeyDown={update} required/>
+                    <input className="inputP" type="text" id="nameUpdate" name="nameUpdate" onKeyDown={handleKeyDown} required/>
                 </span>
             </form>
         </TableRow>
@@ -115,7 +119,7 @@ const Profile = () => {
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
-                    <input type="text" id="monthPay" name="monthPay" onKeyDown={update} required/>
+                    <input type="text" id="monthPay" name="monthPay" onKeyDown={handleKeyDown} required/>
                 </span>
             </form>
         </TableRow>
@@ -126,7 +130,7 @@ const Profile = () => {
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
-                    <input className="inputP" type="text" id="refKey" name="refKey" onKeyDown={update} required/>
+                    <input className="inputP" type="text" id="refKey" name="refKey" onKeyDown={handleKeyDown} required/>
                 </span>
             </form>
         </TableRow>
