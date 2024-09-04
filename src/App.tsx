@@ -7,13 +7,15 @@ import Settings from "./components/Settings";
 import Duty from "./components/Duty";
 import LoadingScreen from "./components/LoadingScreen";
 import Replacement from "./components/Replacement";
+import Calculator from "./components/Calculator";
+type VisibleSection = 'home'|'replacement'|'duty'|'profile'|'settings'|'calculator'
 
 
 const App = () => {
     const [isRendered, setIsRendered] = useState<boolean>(false);
-    const [visibleSection, setVisibleSection] = useState<string>('home');
+    const [visibleSection, setVisibleSection] = useState<VisibleSection>('home');
 
-    const showSection = (section: string) => {
+    const showSection = (section: VisibleSection) => {
         setVisibleSection(section);
     };
 
@@ -37,6 +39,7 @@ const App = () => {
             <div className={visibleSection === 'duty' ? 'visible' : 'hidden'}><Duty/></div>
             <div className={visibleSection === 'profile' ? 'visible' : 'hidden'}><Profile/></div>
             <div className={visibleSection === 'settings' ? 'visible' : 'hidden'}><Settings/></div>
+            <div className={visibleSection === 'calculator' ? 'visible' : 'hidden'}><Calculator/></div>
             <div className="buf"></div>
             <nav className="mobile-nav">
                 <button onClick={() => showSection('home')} className="bloc-icon">
@@ -52,7 +55,10 @@ const App = () => {
                     <img src="/images/profile.svg" alt="profile"/>
                 </button>
                 <button onClick={() => showSection('settings')} className="bloc-icon">
-                    <img src="/images/settings.svg" alt="home"/>
+                    <img src="/images/settings.svg" alt="settings"/>
+                </button>
+                <button onClick={() => showSection('calculator')} className="bloc-icon">
+                    <img src="/images/calculator.svg" alt="calculator"/>
                 </button>
             </nav>
         </div>

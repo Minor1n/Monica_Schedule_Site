@@ -33,7 +33,8 @@ const Profile = () => {
         setUser(data)
     }
 
-    const update = async () => {
+    const update = async (e: React.KeyboardEvent<HTMLInputElement>|React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         const group = (document.getElementById('selectGroup') as HTMLSelectElement).value;
         const dutyDay = (document.getElementById('selectDutyDay') as HTMLSelectElement).value;
         const name = (document.getElementById('nameUpdate') as HTMLInputElement).value.trim();
@@ -94,7 +95,7 @@ const Profile = () => {
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
-                    <input className="inputP" type="text" id="nameUpdate" name="nameUpdate" required/>
+                    <input className="inputP" type="text" id="nameUpdate" name="nameUpdate" onKeyDown={update} required/>
                 </span>
             </form>
         </TableRow>
@@ -114,7 +115,7 @@ const Profile = () => {
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
-                    <input type="text" id="monthPay" name="monthPay" required/>
+                    <input type="text" id="monthPay" name="monthPay" onKeyDown={update} required/>
                 </span>
             </form>
         </TableRow>
@@ -125,7 +126,7 @@ const Profile = () => {
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
-                    <input className="inputP" type="text" id="refKey" name="refKey" required/>
+                    <input className="inputP" type="text" id="refKey" name="refKey" onKeyDown={update} required/>
                 </span>
             </form>
         </TableRow>

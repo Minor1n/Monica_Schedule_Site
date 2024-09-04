@@ -181,3 +181,21 @@ form {
     overflow: hidden;
     position: absolute;
 }
+
+td input{
+    all: unset;
+    vertical-align: middle;
+    scrollbar-width: none;
+}
+
+.calcInput{
+    height: 100%;
+    width: 100%;
+    font-size: 5vw;
+}
+.calcResult{
+    font-size: 5vw;
+}
+.calcHeight{
+    height: 10vw;
+}
