@@ -46,6 +46,14 @@ const Calculator = () => {
         setResult(sum);
     };
 
+    const clearFields = ()=>{
+        setInputs({
+            a11: '', a12: '', a13: '',
+            a21: '', a22: '', a23: '',
+            a31: '', a32: '', a33: ''
+        })
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         calculateResult();
@@ -66,6 +74,7 @@ const Calculator = () => {
                     <tr>
                         <td colSpan={3} className="title"><b>Калькулятор определителя 3-го порядка</b></td>
                     </tr>
+                    <tr className="line"></tr>
                     <tr className="line"></tr>
                     {inputIds.map((row, rowIndex) => (
                         <tr className="calcHeight" key={rowIndex}>
@@ -91,8 +100,13 @@ const Calculator = () => {
                                 <img src="/images/equal.svg" alt="equal" className="calcHeight"/>
                             </button>
                         </td>
-                        <td colSpan={2} className="calcResult">
+                        <td className="calcResult">
                             {result !== null && result}
+                        </td>
+                        <td>
+                            <button onClick={clearFields}>
+                                <img src="/images/return.svg" alt="return" className="calcHeight"/>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
