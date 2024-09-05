@@ -195,6 +195,7 @@ td input{
 }
 .calcResult{
     font-size: 5vw;
+    min-width: 10vw;
 }
 .calcHeight{
     height: 10vw;

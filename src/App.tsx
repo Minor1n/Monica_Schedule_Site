@@ -2,13 +2,12 @@ import './styles/main.css'
 import React, {useLayoutEffect, useState} from "react";
 import {api, userId} from "./index";
 import Home from "./components/Home";
-import Profile from "./components/Profile";
-import Settings from "./components/Settings";
 import Duty from "./components/Duty";
 import LoadingScreen from "./components/LoadingScreen";
 import Replacement from "./components/Replacement";
-import Calculator from "./components/Calculator";
-type VisibleSection = 'home'|'replacement'|'duty'|'profile'|'settings'|'calculator'
+import Other from "./components/Other";
+
+type VisibleSection = 'home'|'replacement'|'duty'|'other'
 
 
 const App = () => {
@@ -37,9 +36,7 @@ const App = () => {
             <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><Home/></div>
             <div className={visibleSection === 'replacement' ? 'visible' : 'hidden'}><Replacement/></div>
             <div className={visibleSection === 'duty' ? 'visible' : 'hidden'}><Duty/></div>
-            <div className={visibleSection === 'profile' ? 'visible' : 'hidden'}><Profile/></div>
-            <div className={visibleSection === 'settings' ? 'visible' : 'hidden'}><Settings/></div>
-            <div className={visibleSection === 'calculator' ? 'visible' : 'hidden'}><Calculator/></div>
+            <div className={visibleSection === 'other' ? 'visible' : 'hidden'}><Other/></div>
             <div className="buf"></div>
             <nav className="mobile-nav">
                 <button onClick={() => showSection('home')} className="bloc-icon">
@@ -51,14 +48,8 @@ const App = () => {
                 <button onClick={() => showSection('duty')} className="bloc-icon">
                     <img src="/images/duty.svg" alt="duty" className='widthTen'/>
                 </button>
-                <button onClick={() => showSection('profile')} className="bloc-icon">
-                    <img src="/images/profile.svg" alt="profile"/>
-                </button>
-                <button onClick={() => showSection('settings')} className="bloc-icon">
-                    <img src="/images/settings.svg" alt="settings"/>
-                </button>
-                <button onClick={() => showSection('calculator')} className="bloc-icon">
-                    <img src="/images/calculator.svg" alt="calculator"/>
+                <button onClick={() => showSection('other')} className="bloc-icon">
+                    <img src="/images/burger.svg" alt="other"/>
                 </button>
             </nav>
         </div>

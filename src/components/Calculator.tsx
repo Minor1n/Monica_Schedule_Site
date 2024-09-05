@@ -1,28 +1,59 @@
 import React, { useState } from 'react';
 
-interface Inputs {
-    a11: string;
-    a12: string;
-    a13: string;
-    a21: string;
-    a22: string;
-    a23: string;
-    a31: string;
-    a32: string;
-    a33: string;
-}
+
+const calculateDeterminant = (matrix: number[][]): number => {
+    const n = matrix.length;
+
+    if (n === 1) {
+        return matrix[0][0];
+    }
+
+    if (n === 2) {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    }
+
+    let determinant = 0;
+
+    for (let i = 0; i < n; i++) {
+        const minor = matrix.slice(1).map(row => row.filter((_, j) => j !== i));
+        determinant += matrix[0][i] * calculateDeterminant(minor) * (i % 2 === 0 ? 1 : -1);
+    }
+
+    return determinant;
+};
 
 const Calculator = () => {
-    const [inputs, setInputs] = useState<Inputs>({
-        a11: '', a12: '', a13: '',
-        a21: '', a22: '', a23: '',
-        a31: '', a32: '', a33: ''
-    });
-    const [result, setResult] = useState<number | null>(null);
+    const [order, setOrder] = useState<number>(3);
+    const [matrix, setMatrix] = useState<string[][]>(Array(3).fill(Array(3).fill('')));
+    const [determinant, setDeterminant] = useState<number | null>(null);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setInputs(prevState => ({ ...prevState, [name]: value }));
+    const handleOrderChange = (value: string) => {
+        const newOrder = Math.max(1, Number(value));
+        setOrder(Number(value));
+        setMatrix(Array(newOrder).fill(Array(newOrder).fill('')));
+        setDeterminant(null);
+    };
+
+    const handleInputChange = (rowIndex: number, colIndex: number, value: string) => {
+        const newMatrix = matrix.map((row, i) =>
+            row.map((cell, j) => (i === rowIndex && j === colIndex ? value : cell))
+        );
+        setMatrix(newMatrix);
+    };
+
+    const convertMatrixToNumbers = (): number[][] => {
+        return matrix.map(row => row.map(cell => (cell !== '' ? Number(cell) : 0)));
+    };
+
+    const calculate = () => {
+        const numericMatrix = convertMatrixToNumbers();
+        const result = calculateDeterminant(numericMatrix);
+        setDeterminant(result);
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        calculate();
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -37,56 +68,41 @@ const Calculator = () => {
         }
     };
 
-    const calculateResult = () => {
-        const { a11, a12, a13, a21, a22, a23, a31, a32, a33 } = inputs;
-        const sum =
-            Number(a11) * (Number(a22) * Number(a33) - Number(a23) * Number(a32)) -
-            Number(a12) * (Number(a21) * Number(a33) - Number(a23) * Number(a31)) +
-            Number(a13) * (Number(a21) * Number(a32) - Number(a22) * Number(a31));
-        setResult(sum);
-    };
-
-    const clearFields = ()=>{
-        setInputs({
-            a11: '', a12: '', a13: '',
-            a21: '', a22: '', a23: '',
-            a31: '', a32: '', a33: ''
-        })
+    const clearMatrix = ()=>{
+        setMatrix(Array(order).fill(Array(order).fill('')));
+        setDeterminant(null);
     }
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        calculateResult();
-    };
-
-    const inputIds: Array<Array<keyof Inputs>> = [
-        ['a11', 'a12', 'a13'],
-        ['a21', 'a22', 'a23'],
-        ['a31', 'a32', 'a33']
-    ];
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <table>
                     <tbody>
-                    <tr className="line"></tr>
-                    <tr>
-                        <td colSpan={3} className="title"><b>Калькулятор определителя 3-го порядка</b></td>
-                    </tr>
-                    <tr className="line"></tr>
-                    <tr className="line"></tr>
-                    {inputIds.map((row, rowIndex) => (
+                        <tr className="line"></tr>
+                        <tr>
+                            <td colSpan={2} className="title"><b>Калькулятор определителя</b></td>
+                            <td className="calcInput title" style={{width:'32vw'}}><input
+                                style={{width:'11vw',height:'100%'}}
+                                type="number"
+                                min={2}
+                                value={order}
+                                onChange={(e) => handleOrderChange(e.target.value)}
+                            /> порядка</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                    {matrix.map((row, rowIndex) => (
                         <tr className="calcHeight" key={rowIndex}>
-                            {row.map(id => (
-                                <td key={id}>
+                            {row.map((cell, colIndex) => (
+                                <td key={colIndex}>
                                     <input
                                         className="calcInput"
+                                        key={colIndex}
                                         type="number"
-                                        id={id}
-                                        name={id}
-                                        value={inputs[id]}
-                                        onChange={handleChange}
+                                        value={cell}
+                                        onChange={(e) => handleInputChange(rowIndex, colIndex, e.target.value)}
                                         onKeyDown={handleKeyDown}
                                         required
                                     />
@@ -94,6 +110,10 @@ const Calculator = () => {
                             ))}
                         </tr>
                     ))}
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
                     <tr className="fiveHeight">
                         <td>
                             <button type="submit">
@@ -101,10 +121,10 @@ const Calculator = () => {
                             </button>
                         </td>
                         <td className="calcResult">
-                            {result !== null && result}
+                            {determinant !== null && determinant}
                         </td>
                         <td>
-                            <button onClick={clearFields}>
+                            <button onClick={clearMatrix}>
                                 <img src="/images/return.svg" alt="return" className="calcHeight"/>
                             </button>
                         </td>
