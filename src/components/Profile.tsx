@@ -115,7 +115,7 @@ const Profile = () => {
             <i>Указывайте в комментарии платежа</i>
         </TableRow>
         <TableRow label="Статус оплаты:" value={user.payment}>
-            Расчитать сумму оплаты<br/>на несколько месяцев<br/>
+            Рассчитать сумму оплаты<br/>на несколько месяцев<br/>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>

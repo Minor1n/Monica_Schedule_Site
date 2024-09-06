@@ -6,8 +6,10 @@ import Duty from "./components/Duty";
 import LoadingScreen from "./components/LoadingScreen";
 import Replacement from "./components/Replacement";
 import Other from "./components/Other";
+import Profile from "./components/Profile";
+import Settings from "./components/Settings";
 
-type VisibleSection = 'home'|'replacement'|'duty'|'other'
+type VisibleSection = 'home'|'replacement'|'duty'|'other'|'profile'|'settings'
 
 
 const App = () => {
@@ -36,6 +38,8 @@ const App = () => {
             <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><Home/></div>
             <div className={visibleSection === 'replacement' ? 'visible' : 'hidden'}><Replacement/></div>
             <div className={visibleSection === 'duty' ? 'visible' : 'hidden'}><Duty/></div>
+            <div className={visibleSection === 'profile' ? 'visible' : 'hidden'}><Profile/></div>
+            <div className={visibleSection === 'settings' ? 'visible' : 'hidden'}><Settings/></div>
             <div className={visibleSection === 'other' ? 'visible' : 'hidden'}><Other/></div>
             <div className="buf"></div>
             <nav className="mobile-nav">
@@ -47,6 +51,12 @@ const App = () => {
                 </button>
                 <button onClick={() => showSection('duty')} className="bloc-icon">
                     <img src="/images/duty.svg" alt="duty" className='widthTen'/>
+                </button>
+                <button onClick={() => showSection('profile')} className="bloc-icon">
+                    <img src="/images/profile.svg" alt="profile"/>
+                </button>
+                <button onClick={() => showSection('settings')} className="bloc-icon">
+                    <img src="/images/settings.svg" alt="settings"/>
                 </button>
                 <button onClick={() => showSection('other')} className="bloc-icon">
                     <img src="/images/burger.svg" alt="other"/>

@@ -197,6 +197,14 @@ td input{
     font-size: 5vw;
     min-width: 10vw;
 }
+.calcStep{
+    font-size: 3vw;
+    height: 3.5vw;
+}
 .calcHeight{
     height: 10vw;
+}
+.fontFive{
+    width: 10vw;
+    font-size: 5vw;
 }
