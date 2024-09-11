@@ -39,7 +39,7 @@ const MatrixMultiplication: React.FC = () => {
         rows: number,
         cols: number
     ) => {
-        setMatrix(Array.from({ length: rows }, () => Array(cols).fill(""))); // Правильное создание матрицы
+        setMatrix(Array.from({ length: rows }, () => Array(cols).fill("")));
     };
 
     const multiplyMatrices = () => {
@@ -90,6 +90,11 @@ const MatrixMultiplication: React.FC = () => {
         multiplyMatrices();
     };
 
+    const clearMatrix = () => {
+        setMatrixA(Array.from({ length: rowsA }, () => Array(colsA).fill("")));
+        setMatrixB(Array.from({ length: rowsB }, () => Array(colsB).fill("")));
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <table>
@@ -99,6 +104,11 @@ const MatrixMultiplication: React.FC = () => {
                 </tr>
                 <tr>
                     <td><b className='calcResult'>Произведение матриц</b></td>
+                    <td style={{width: '10vw'}}>
+                        <button type="button" onClick={clearMatrix}>
+                            <img src="/images/return.svg" alt="return" className="calcHeight"/>
+                        </button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -248,15 +258,19 @@ const MatrixMultiplication: React.FC = () => {
                         </button>
                     </td>
                 </tr>
-                <tr>
-                    <td className='line'></td>
-                </tr>
-                <tr>
-                    <td className='line'></td>
-                </tr>
-                <tr>
-                    <td className='profileB'>Матрица C<sub>{rowsA}{colsB}</sub></td>
-                </tr>
+                {result && (
+                    <>
+                        <tr>
+                            <td className='line'></td>
+                        </tr>
+                        <tr>
+                            <td className='line'></td>
+                        </tr>
+                        <tr>
+                            <td className='profileB'>Матрица C<sub>{rowsA}{colsB}</sub></td>
+                        </tr>
+                    </>
+                )}
                 </tbody>
             </table>
 

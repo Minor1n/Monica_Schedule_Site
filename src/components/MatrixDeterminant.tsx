@@ -47,7 +47,7 @@ const calculateDeterminant = (matrix: number[][], steps: React.JSX.Element[]): n
     return determinant;
 };
 
-const Calculator = () => {
+const MatrixDeterminant = () => {
     const [order, setOrder] = useState<number>(3);
     const [matrix, setMatrix] = useState<string[][]>(Array(3).fill(Array(3).fill('')));
     const [determinant, setDeterminant] = useState<number | null>(null);
@@ -110,7 +110,7 @@ const Calculator = () => {
                     <tbody>
                     <tr className="line"></tr>
                     <tr>
-                        <td colSpan={2} className="title"><b>Калькулятор определителя</b></td>
+                        <td colSpan={2} className="title"><b>Определитель матрицы</b></td>
                         <td className="calcInput title" style={{width:'32vw'}}><input
                             style={{width:'11vw',height:'100%'}}
                             type="number"
@@ -161,23 +161,25 @@ const Calculator = () => {
                     </tr>
                     </tbody>
                 </table>
-                <table>
-                    <tbody>
-                    <tr>
-                        <td colSpan={2} className="calcResult">Шаги решения:</td>
-                    </tr>
-                    <tr>
-                        <td className='line'></td>
-                    </tr>
-                    <tr>
-                        <td className='line'></td>
-                    </tr>
-                    {solutionSteps}
-                    </tbody>
-                </table>
+                {determinant!==null && (
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td colSpan={2} className="calcResult">Шаги решения:</td>
+                        </tr>
+                        <tr>
+                            <td className='line'></td>
+                        </tr>
+                        <tr>
+                            <td className='line'></td>
+                        </tr>
+                        {solutionSteps}
+                        </tbody>
+                    </table>
+                )}
             </form>
         </div>
     );
 };
 
-export default Calculator;
+export default MatrixDeterminant;
