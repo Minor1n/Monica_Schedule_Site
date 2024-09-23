@@ -179,7 +179,6 @@ const MafiaHost = () => {
 
     {players && (
         <table>
-            {<>{console.log(players)}</>}
             <tbody>
             <tr>
                 <td colSpan={3}><b className="title">Игроки:</b></td>

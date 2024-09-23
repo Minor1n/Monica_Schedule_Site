@@ -42,7 +42,7 @@ const MafiaPlayer:React.FC<IMafiaPlayerProps> = ({sessionId}) => {
         return () => {
             newSocket.close();
         };
-    }, []);
+    }, [sessionId]);
 
     if(!isRendered){
         return (<LoadingScreen/>)

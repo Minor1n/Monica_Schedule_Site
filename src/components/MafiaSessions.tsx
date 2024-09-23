@@ -28,7 +28,9 @@ const MafiaSessions = () => {
     }
 
     const sessionCreate = async ()=>{
-        setJoin(userId)
+        if(userId){
+            setJoin(userId)
+        }
     }
 
     const sessionJoin = async(id:number)=>{
