@@ -38,28 +38,28 @@ const Other = () => {
                     </tr>
                     <tr>
                         <td>
-                            <button onClick={() => showSection('MatrixDeterminant')} className="bloc-icon">
+                            <button onClick={() => showSection('MatrixDeterminant')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
                                 <b style={{fontSize: '3.5vw', padding: '1vw'}}>Калькулятор определителя матрицы</b>
                             </button>
                         </td>
                     </tr>
                     <tr>
                         <td className='profileB'>
-                            <button onClick={() => showSection('MatrixMultiplication')} className="bloc-icon">
+                            <button onClick={() => showSection('MatrixMultiplication')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
                                 <b style={{fontSize: '3.5vw', padding: '1vw'}}>Калькулятор произведения матриц</b>
                             </button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <button onClick={() => showSection('MatrixInversion')} className="bloc-icon">
+                            <button onClick={() => showSection('MatrixInversion')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
                                 <b style={{fontSize: '3.5vw', padding: '1vw'}}>Калькулятор обратной матрицы</b>
                             </button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <button onClick={() => showSection('Mafia')} className="bloc-icon">
+                            <button onClick={() => showSection('Mafia')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
                                 <b style={{fontSize: '3.5vw', padding: '1vw'}}>Мафия</b>
                             </button>
                         </td>
