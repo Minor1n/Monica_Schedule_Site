@@ -28,6 +28,7 @@ const MafiaSessions = () => {
     }
 
     const sessionCreate = async ()=>{
+        console.log(userId)
         setJoin(userId)
     }
 
