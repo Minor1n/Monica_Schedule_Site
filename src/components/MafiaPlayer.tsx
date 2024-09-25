@@ -31,7 +31,9 @@ const MafiaPlayer:React.FC<IMafiaPlayerProps> = ({sessionId}) => {
         setIsRendered(true)
 
         newSocket.on('updatePlayers', (updatedPlayers: { newPlayers: IPlayer[], sessionId:number }) => {
-            setPlayers(updatedPlayers.newPlayers);
+            if(updatedPlayers.sessionId === sessionId){
+                setPlayers(updatedPlayers.newPlayers);
+            }
         });
         newSocket.on('updatePlayer', (updatedPlayer: IPlayer) => {
             if(Number(updatedPlayer.userId) === userId){

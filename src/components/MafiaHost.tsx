@@ -113,7 +113,9 @@ const MafiaHost = () => {
         setIsRendered(true)
 
         newSocket.on('updatePlayers', (updatedPlayers: { newPlayers: IPlayer[], sessionId:number }) => {
-            setPlayers(updatedPlayers.newPlayers);
+            if(updatedPlayers.sessionId === userId){
+                setPlayers(updatedPlayers.newPlayers);
+            }
         });
 
         return () => {
