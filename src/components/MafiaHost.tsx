@@ -24,42 +24,20 @@ const rolesNames = new Map<number,string>([
     [4,'Любовница'],
     [5,'Маньяк'],
     [6,'Лунатик'],
+    [7,'Патрульный']
 ])
 
 const MafiaHost = () => {
     const [isRendered, setIsRendered] = useState(false);
     const [socket, setSocket] = useState<Socket | null>(null);
     const [players, setPlayers] = useState<IPlayer[]>()
-    const [roles, setRoles] = useState<IRole[]>([
-        {
-            name: rolesNames.get(0)??'Роль не найдена',
+    const [roles, setRoles] = useState<IRole[]>(
+        Array.from(rolesNames, ([id, name]) => ({
+            name: name ?? 'Роль не найдена',
             count: 0,
-        },
-        {
-            name: rolesNames.get(1)??'Роль не найдена',
-            count: 0,
-        },
-        {
-            name: rolesNames.get(2)??'Роль не найдена',
-            count: 0,
-        },
-        {
-            name: rolesNames.get(3)??'Роль не найдена',
-            count: 0,
-        },
-        {
-            name: rolesNames.get(4)??'Роль не найдена',
-            count: 0,
-        },
-        {
-            name: rolesNames.get(5)??'Роль не найдена',
-            count: 0,
-        },
-        {
-            name: rolesNames.get(6)??'Роль не найдена',
-            count: 0,
-        },
-    ])
+        }))
+    )
+    const [notes, setNotes] = useState<string>('')
 
     const saveRoles = async (role:number,count:number)=>{
         const newRoles = [...roles]
@@ -135,34 +113,15 @@ const MafiaHost = () => {
             <tr>
                 <td colSpan={2}><b className="title">Укажите роли:</b></td>
             </tr>
-            <tr>
-                <td><b className="profileB">Мирный житель</b></td>
-                <td><input style={{height:'100%',width:'100%',fontSize:'3vw'}} min={0} type="number" id="role0" onChange={(e)=>saveRoles(0,Number(e.target.value))} required/></td>
-            </tr>
-            <tr>
-                <td><b className="profileB">Мафия</b></td>
-                <td><input style={{height:'100%',width:'100%',fontSize:'3vw'}} min={0} type="number" id="role1" onChange={(e)=>saveRoles(1,Number(e.target.value))} required/></td>
-            </tr>
-            <tr>
-                <td><b className="profileB">Шериф</b></td>
-                <td><input style={{height:'100%',width:'100%',fontSize:'3vw'}} min={0} type="number" id="role2" onChange={(e)=>saveRoles(2,Number(e.target.value))} required/></td>
-            </tr>
-            <tr>
-                <td><b className="profileB">Доктор</b></td>
-                <td><input style={{height:'100%',width:'100%',fontSize:'3vw'}} min={0} type="number" id="role3" onChange={(e)=>saveRoles(3,Number(e.target.value))} required/></td>
-            </tr>
-            <tr>
-                <td><b className="profileB">Любовница</b></td>
-                <td><input style={{height:'100%',width:'100%',fontSize:'3vw'}} min={0} type="number" id="role4" onChange={(e)=>saveRoles(4,Number(e.target.value))} required/></td>
-            </tr>
-            <tr>
-                <td><b className="profileB">Маньяк</b></td>
-                <td><input style={{height:'100%',width:'100%',fontSize:'3vw'}} min={0} type="number" id="role5" onChange={(e)=>saveRoles(5,Number(e.target.value))} required/></td>
-            </tr>
-            <tr>
-                <td><b className="profileB">Лунатик</b></td>
-                <td><input style={{height:'100%',width:'100%',fontSize:'3vw'}} min={0} type="number" id="role6" onChange={(e)=>saveRoles(6,Number(e.target.value))} required/></td>
-            </tr>
+            {roles && roles.map((role,index)=>
+                <tr>
+                    <td><b className="profileB">{role.name}</b></td>
+                    <td><input
+                        style={{height: '100%', width: '100%', fontSize: '3vw'}}
+                        min={0} type="number" id="role0" title='0'
+                        onChange={(e) => saveRoles(index, Number(e.target.value))} required/></td>
+                </tr>
+            )}
             </tbody>
         </table>
     </form>
@@ -185,8 +144,8 @@ const MafiaHost = () => {
             <tr>
                 <td colSpan={3}><b className="title">Игроки:</b></td>
             </tr>
-            {players.map((player:IPlayer) => {
-                return player.isDeath === 'true' ? <tr style={{backgroundColor:'red'}}>
+            {players.map((player:IPlayer) => (
+                player.isDeath === 'true' ? <tr style={{backgroundColor:'red'}}>
                         <td><b className='profileB'>{player.userName}</b></td>
                         <td><b className='profileB'>{player.role}</b></td>
                         <td>
@@ -204,10 +163,25 @@ const MafiaHost = () => {
                             </button>
                         </td>
                     </tr>
-            })}
+            ))}
             </tbody>
         </table>
     )}
+    <table>
+        <tbody>
+        <tr>
+            <td><b className="title">Заметки</b></td>
+        </tr>
+        <tr style={{height:'50vw'}}>
+            <td><b className='profileB'>
+                <textarea
+                    style={{all:'unset',textAlign:'left',height:'100%',width:'100%'}}
+                    value={notes}
+                    onChange={(e)=>setNotes(e.target.value)} required/>
+            </b></td>
+        </tr>
+        </tbody>
+    </table>
 </>
     );
 };
