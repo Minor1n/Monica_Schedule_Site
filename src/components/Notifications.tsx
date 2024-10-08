@@ -11,6 +11,7 @@ interface INotifications{
     duty:'on'|'off'
     replacement:'on'|'off'
     schedule:'on'|'off'
+    groupReplacement:'on'|'off'
 }
 
 interface IFields {
@@ -24,7 +25,8 @@ const Notifications = () => {
     const [notifications, setNotifications] = useState<INotifications>({
         duty:'on',
         replacement:'on',
-        schedule:'on'
+        schedule:'on',
+        groupReplacement:'on'
     })
 
     const load = async () => {
@@ -51,6 +53,11 @@ const Notifications = () => {
             label: "Появление новых замен",
             onClick: () => toggleNotification('replacement'),
             notificationType: notifications.replacement
+        },
+        {
+            label: "Замены для группы",
+            onClick: () => toggleNotification('groupReplacement'),
+            notificationType: notifications.groupReplacement
         },
         {
             label: "Рассылка таблицы дежурных за неделю",
