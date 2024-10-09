@@ -1,13 +1,13 @@
 import '@styles/main.css'
 import React, {useLayoutEffect, useState} from "react";
 import {api, userId} from "@index";
-import Home from "@components/main/Home";
-import Duty from "@components/duty/Duty";
+import MainHome from "@components/home/MainHome";
+import MainDuty from "@components/duty/MainDuty";
+import MainReplacement from "@components/replacements/MainReplacement";
+import MainOther from "@components/other/MainOther";
+import MainProfile from "@components/profile/MainProfile";
+import MainSettings from "@components/settings/MainSettings";
 import LoadingScreen from "@components/LoadingScreen";
-import Replacement from "@components/replacements/Replacement";
-import Other from "@components/other/Other";
-import Profile from "@components/profile/Profile";
-import Settings from "@components/settings/Settings";
 import Navigation from "@components/Navigation";
 import Buffer from "@components/Buffer";
 
@@ -36,12 +36,12 @@ const App = () => {
     }
     return (
         <div className='fill'>
-            <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><Home/></div>
-            <div className={visibleSection === 'replacement' ? 'visible' : 'hidden'}><Replacement/></div>
-            <div className={visibleSection === 'duty' ? 'visible' : 'hidden'}><Duty/></div>
-            <div className={visibleSection === 'profile' ? 'visible' : 'hidden'}><Profile/></div>
-            <div className={visibleSection === 'settings' ? 'visible' : 'hidden'}><Settings/></div>
-            <div className={visibleSection === 'other' ? 'visible' : 'hidden'}><Other/></div>
+            <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><MainHome/></div>
+            <div className={visibleSection === 'replacement' ? 'visible' : 'hidden'}><MainReplacement/></div>
+            <div className={visibleSection === 'duty' ? 'visible' : 'hidden'}><MainDuty/></div>
+            <div className={visibleSection === 'profile' ? 'visible' : 'hidden'}><MainProfile/></div>
+            <div className={visibleSection === 'settings' ? 'visible' : 'hidden'}><MainSettings/></div>
+            <div className={visibleSection === 'other' ? 'visible' : 'hidden'}><MainOther/></div>
             <Buffer/>
             <Navigation>
                 <button onClick={() => showSection('home')} className="bloc-icon">

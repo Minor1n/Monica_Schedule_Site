@@ -6,7 +6,7 @@ import IReplacementData from "@interfaces/IReplacementData";
 
 let replacementPage = 0
 
-const Replacement = () => {
+const MainReplacement = () => {
     const [isRendered, setIsRendered] = useState(false);
     const [replacement, setReplacement] = useState<string>('')
 
@@ -48,4 +48,4 @@ const Replacement = () => {
     );
 };
 
-export default Replacement;
+export default MainReplacement;

@@ -1,7 +1,7 @@
 import React from 'react';
 import IMafiaSelectRoles from "@interfaces/components/IMafiaSelectRoles";
 
-const MafiaSelectRoles:React.FC<IMafiaSelectRoles> = ({roles,onChange}) => {
+const SelectRoles:React.FC<IMafiaSelectRoles> = ({roles,onChange}) => {
     return (
         <form id="roles">
             <table>
@@ -24,4 +24,4 @@ const MafiaSelectRoles:React.FC<IMafiaSelectRoles> = ({roles,onChange}) => {
     );
 };
 
-export default MafiaSelectRoles;
+export default SelectRoles;

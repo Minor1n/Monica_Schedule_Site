@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import MatrixDeterminant from './MatrixDeterminant';
 import MatrixMultiplication from './MatrixMultiplication';
 import MatrixInversion from './MatrixInversion';
-import MafiaHome from "@components/games/mafia/MafiaHome";
+import MainMafia from "@components/games/mafia/MainMafia";
 
 type VisibleSection = 'MatrixDeterminant' | 'MatrixMultiplication' | 'MatrixInversion' |  'Mafia' | null;
 
-const Other = () => {
+const MainOther = () => {
     const [visibleSection, setVisibleSection] = useState<VisibleSection>(null);
 
     const showSection = (section: VisibleSection) => {
@@ -83,11 +83,11 @@ const Other = () => {
                 </div>
             )}
             {visibleSection === 'Mafia' && (
-                <MafiaHome/>
+                <MainMafia/>
             )}
             <div className="buf"/>
         </div>
     );
 };
 
-export default Other;
+export default MainOther;

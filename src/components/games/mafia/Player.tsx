@@ -2,11 +2,11 @@ import React, {useEffect, useState } from 'react';
 import { userId, api } from '@index';
 import {io, Socket } from 'socket.io-client';
 import LoadingScreen from '@components/LoadingScreen';
-import MafiaPlayerPlayers from "./MafiaPlayerPlayers";
+import PlayerPlayers from "./PlayerPlayers";
 import IPlayer from "@interfaces/IPlayer";
 import IMafiaPlayer from "@interfaces/components/IMafiaPlayer";
 
-const MafiaPlayer:React.FC<IMafiaPlayer> = ({sessionId}) => {
+const Player:React.FC<IMafiaPlayer> = ({sessionId}) => {
     const [isRendered, setIsRendered] = useState(false);
     const [socket, setSocket] = useState<Socket | null>(null);
     const [players, setPlayers] = useState<IPlayer[]>()
@@ -52,9 +52,9 @@ const MafiaPlayer:React.FC<IMafiaPlayer> = ({sessionId}) => {
                 </tbody>
             </table>
 
-            <MafiaPlayerPlayers players={players}/>
+            <PlayerPlayers players={players}/>
         </>
     );
 };
 
-export default MafiaPlayer;
+export default Player;

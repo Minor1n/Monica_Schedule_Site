@@ -4,8 +4,8 @@ import LoadingScreen from "@components/LoadingScreen";
 import {io, Socket} from "socket.io-client";
 import IPlayer from "@interfaces/IPlayer";
 import IRole from "@interfaces/IRole";
-import MafiaSelectRoles from "./MafiaSelectRoles";
-import MafiaHostPlayers from "./MafiaHostPlayers";
+import SelectRoles from "./SelectRoles";
+import HostPlayers from "./HostPlayers";
 
 const rolesNames = new Map<number,string>([
     [0,'Мирный житель'],
@@ -18,7 +18,7 @@ const rolesNames = new Map<number,string>([
     [7,'Патрульный']
 ])
 
-const MafiaHost = () => {
+const Host = () => {
     const [isRendered, setIsRendered] = useState(false);
     const [socket, setSocket] = useState<Socket | null>(null);
     const [players, setPlayers] = useState<IPlayer[]>()
@@ -98,7 +98,7 @@ const MafiaHost = () => {
 
     return (
 <>
-    <MafiaSelectRoles roles={roles} onChange={saveRoles}/>
+    <SelectRoles roles={roles} onChange={saveRoles}/>
 
     <table>
         <tbody>
@@ -112,7 +112,7 @@ const MafiaHost = () => {
         </tbody>
     </table>
 
-    <MafiaHostPlayers players={players} kill={playerKill} relive={playerRelive}/>
+    <HostPlayers players={players} kill={playerKill} relive={playerRelive}/>
 
     <table>
         <tbody>
@@ -133,4 +133,4 @@ const MafiaHost = () => {
     );
 };
 
-export default MafiaHost;
+export default Host;

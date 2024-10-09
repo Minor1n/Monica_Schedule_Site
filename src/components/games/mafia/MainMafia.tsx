@@ -1,12 +1,12 @@
 import React, {useLayoutEffect, useState} from 'react';
 import {api, userId} from "@index";
 import LoadingScreen from "@components/LoadingScreen";
-import MafiaHost from "./MafiaHost";
-import MafiaPlayer from "./MafiaPlayer";
-import MafiaSessions from "./MafiaSessions";
+import Host from "./Host";
+import Player from "./Player";
+import Sessions from "./Sessions";
 import ISession from "@interfaces/ISession";
 
-const MafiaHome = () => {
+const MainMafia = () => {
     const [isRendered, setIsRendered] = useState(false);
     const [sessions, setSessions] = useState<ISession[]>()
     const [join, setJoin] = useState<number|null>(null)
@@ -81,15 +81,15 @@ const MafiaHome = () => {
                             <td className="line" colSpan={4}></td>
                         </tr>
 
-                        <MafiaSessions sessions={sessions} join={sessionJoin} exit={exit}/>
+                        <Sessions sessions={sessions} join={sessionJoin} exit={exit}/>
                     </>
                 )}
                 </tbody>
             </table>
-            {join && join === userId && (<MafiaHost/>)}
-            {join && join !== userId && (<MafiaPlayer sessionId={Number(join)}/>)}
+            {join && join === userId && (<Host/>)}
+            {join && join !== userId && (<Player sessionId={Number(join)}/>)}
         </>
     );
 };
 
-export default MafiaHome;
+export default MainMafia;

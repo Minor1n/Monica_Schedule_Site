@@ -1,10 +1,10 @@
 import React, {useLayoutEffect, useState} from 'react';
 import {api,userId} from "@index";
 import LoadingScreen from "@components/LoadingScreen";
-import ProfileTableRow from "./ProfileTableRow";
+import TableRow from "./TableRow";
 import IUser from "@interfaces/IUser";
 
-const Profile = () => {
+const MainProfile = () => {
     const [isRendered, setIsRendered] = useState(false);
     const [user, setUser] = useState<IUser>();
 
@@ -68,38 +68,38 @@ const Profile = () => {
             <td><b className="profileB">Настроить</b></td>
         </tr>
         
-        <ProfileTableRow label="Группа:" value={user.groupName}>
+        <TableRow label="Группа:" value={user.groupName}>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
                     <select dangerouslySetInnerHTML={{__html: String(user.groupOptions)}} name="selectGroup" id="selectGroup"/>
                 </span>
             </form>
-        </ProfileTableRow>
+        </TableRow>
 
-        <ProfileTableRow label="Имя:" value={user.name}>
+        <TableRow label="Имя:" value={user.name}>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
                     <input className="inputP" type="text" id="nameUpdate" name="nameUpdate" onKeyDown={handleKeyDown} required/>
                 </span>
             </form>
-        </ProfileTableRow>
+        </TableRow>
 
-        <ProfileTableRow label="День дежурства:" value={user.duty}>
+        <TableRow label="День дежурства:" value={user.duty}>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
                     <select dangerouslySetInnerHTML={{__html: String(user.dutyDayOptions)}} name="selectDutyDay" id="selectDutyDay"/>
                 </span>
             </form>
-        </ProfileTableRow>
+        </TableRow>
 
-        <ProfileTableRow label="Телеграм id:" value={userId}>
+        <TableRow label="Телеграм id:" value={userId}>
             <i>Указывайте в комментарии платежа</i>
-        </ProfileTableRow>
+        </TableRow>
 
-        <ProfileTableRow label="Статус оплаты:" value={user.payment}>
+        <TableRow label="Статус оплаты:" value={user.payment}>
             Рассчитать сумму оплаты<br/>на несколько месяцев<br/>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
@@ -107,24 +107,24 @@ const Profile = () => {
                     <input type="text" id="monthPay" name="monthPay" onKeyDown={handleKeyDown} required/>
                 </span>
             </form>
-        </ProfileTableRow>
+        </TableRow>
 
-        <ProfileTableRow label="Сумма оплаты с учетом рефералки:" value={`${user.paymentAmount}р`}>
+        <TableRow label="Сумма оплаты с учетом рефералки:" value={`${user.paymentAmount}р`}>
             <a href="https://www.tinkoff.ru/rm/korop.aleksandr4/KHtiD43274">Перейти на страницу оплаты</a>
-        </ProfileTableRow>
+        </TableRow>
 
-        <ProfileTableRow label="Реферальный ключ:" value={user.refKey}>
+        <TableRow label="Реферальный ключ:" value={user.refKey}>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
                     <input className="inputP" type="text" id="refKey" name="refKey" onKeyDown={handleKeyDown} required/>
                 </span>
             </form>
-        </ProfileTableRow>
+        </TableRow>
 
-        <ProfileTableRow label="Бонус рефералов:" value={`${user.refBonus}%`}/>
+        <TableRow label="Бонус рефералов:" value={`${user.refBonus}%`}/>
 
-        <ProfileTableRow label="Связь с админом:" value="@a_korop"/>
+        <TableRow label="Связь с админом:" value="@a_korop"/>
 
         <tr className="fiveHeight">
             <td colSpan={2}></td>
@@ -140,4 +140,4 @@ const Profile = () => {
     )
 };
 
-export default Profile;
+export default MainProfile;

@@ -1,7 +1,7 @@
 import React from 'react';
 import IProfileTableRow from "@interfaces/components/IProfileTableRow";
 
-const ProfileTableRow: React.FC<IProfileTableRow> = ({ label, value, children }) => {
+const TableRow: React.FC<IProfileTableRow> = ({ label, value, children }) => {
     return (
         <tr className="fiveHeight">
             <td><b className="profileB">{label}</b></td>
@@ -11,4 +11,4 @@ const ProfileTableRow: React.FC<IProfileTableRow> = ({ label, value, children })
     );
 };
 
-export default ProfileTableRow;
+export default TableRow;

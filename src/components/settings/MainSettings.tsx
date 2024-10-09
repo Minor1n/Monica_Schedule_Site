@@ -2,7 +2,7 @@ import React from 'react';
 import Notifications from "./Notifications";
 import Theme from "./Theme";
 
-const Settings = () => {
+const MainSettings = () => {
     return (
 <div>
     <table>
@@ -20,4 +20,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default MainSettings;

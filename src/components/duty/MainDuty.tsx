@@ -7,7 +7,7 @@ import Buffer from "@components/Buffer";
 
 let dutyPage = 0
 
-const Duty = () => {
+const MainDuty = () => {
     const [isRendered, setIsRendered] = useState(false);
     const [table, setTable] = useState<string>('')
 
@@ -55,4 +55,4 @@ const Duty = () => {
     );
 };
 
-export default Duty;
+export default MainDuty;

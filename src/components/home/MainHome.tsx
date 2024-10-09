@@ -2,8 +2,7 @@ import React from 'react';
 import Schedule from "./Schedule";
 import GroupReplacement from "./GroupReplacement";
 
-
-const Home = () => {
+const MainHome = () => {
     return (
         <div>
             <GroupReplacement/>
@@ -12,4 +11,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default MainHome;

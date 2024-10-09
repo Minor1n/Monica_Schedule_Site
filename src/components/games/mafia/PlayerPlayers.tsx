@@ -2,7 +2,7 @@ import React from 'react';
 import IPlayer from "@interfaces/IPlayer";
 import IMafiaPlayerPlayers from "@interfaces/components/IMafiaPlayerPlayers";
 
-const MafiaPlayerPlayers:React.FC<IMafiaPlayerPlayers> = ({players}) => {
+const PlayerPlayers:React.FC<IMafiaPlayerPlayers> = ({players}) => {
     return (
         <>
             {players && (
@@ -26,4 +26,4 @@ const MafiaPlayerPlayers:React.FC<IMafiaPlayerPlayers> = ({players}) => {
     );
 };
 
-export default MafiaPlayerPlayers;
+export default PlayerPlayers;

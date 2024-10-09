@@ -2,7 +2,7 @@ import React from 'react';
 import IPlayer from "@interfaces/IPlayer";
 import IMafiaHostPlayers from "@interfaces/components/IMafiaHostPlayers";
 
-const MafiaHostPlayers:React.FC<IMafiaHostPlayers> = ({players,kill,relive}) => {
+const HostPlayers:React.FC<IMafiaHostPlayers> = ({players,kill,relive}) => {
     return (
         <>{players && (
             <table>
@@ -36,4 +36,4 @@ const MafiaHostPlayers:React.FC<IMafiaHostPlayers> = ({players,kill,relive}) => 
     );
 };
 
-export default MafiaHostPlayers;
+export default HostPlayers;

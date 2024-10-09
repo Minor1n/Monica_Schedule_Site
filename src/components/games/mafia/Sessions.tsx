@@ -2,7 +2,7 @@ import React from 'react';
 import {userId} from "@index";
 import IMafiaSessions from "@interfaces/components/IMafiaSessions";
 
-const MafiaSessions:React.FC<IMafiaSessions> = ({sessions,join,exit}) => {
+const Sessions:React.FC<IMafiaSessions> = ({sessions,join,exit}) => {
     return (
         <>
             {sessions && (
@@ -37,4 +37,4 @@ const MafiaSessions:React.FC<IMafiaSessions> = ({sessions,join,exit}) => {
     );
 };
 
-export default MafiaSessions;
+export default Sessions;
