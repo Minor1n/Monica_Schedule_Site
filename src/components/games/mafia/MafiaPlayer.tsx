@@ -1,20 +1,12 @@
 import React, {useEffect, useState } from 'react';
-import { userId, api } from '../index';
+import { userId, api } from '@index';
 import {io, Socket } from 'socket.io-client';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from '@components/LoadingScreen';
+import MafiaPlayerPlayers from "./MafiaPlayerPlayers";
+import IPlayer from "@interfaces/IPlayer";
+import IMafiaPlayer from "@interfaces/components/IMafiaPlayer";
 
-interface IPlayer {
-    userId: string;
-    userName: string;
-    role: string;
-    isDeath: 'true'|'false';
-}
-
-interface IMafiaPlayerProps {
-    sessionId: number;
-}
-
-const MafiaPlayer:React.FC<IMafiaPlayerProps> = ({sessionId}) => {
+const MafiaPlayer:React.FC<IMafiaPlayer> = ({sessionId}) => {
     const [isRendered, setIsRendered] = useState(false);
     const [socket, setSocket] = useState<Socket | null>(null);
     const [players, setPlayers] = useState<IPlayer[]>()
@@ -59,23 +51,8 @@ const MafiaPlayer:React.FC<IMafiaPlayerProps> = ({sessionId}) => {
                 </tr>
                 </tbody>
             </table>
-            {players && (
-                <table>
-                    <tbody>
-                    <tr>
-                        <td colSpan={3}><b className="title">Игроки:</b></td>
-                    </tr>
-                    {players.map((player: IPlayer) => {
-                        return player.isDeath === 'true' ? <tr style={{backgroundColor: 'red'}}>
-                                <td><b className='profileB'>{player.userName}</b></td>
-                            </tr> :
-                            <tr>
-                                <td><b className='profileB'>{player.userName}</b></td>
-                            </tr>
-                    })}
-                    </tbody>
-                </table>
-            )}
+
+            <MafiaPlayerPlayers players={players}/>
         </>
     );
 };

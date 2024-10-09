@@ -1,16 +1,12 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api, userId} from "../index";
-import LoadingScreen from "./LoadingScreen";
+import {api, userId} from "@index";
+import LoadingScreen from "@components/LoadingScreen";
 import MafiaHost from "./MafiaHost";
 import MafiaPlayer from "./MafiaPlayer";
+import MafiaSessions from "./MafiaSessions";
+import ISession from "@interfaces/ISession";
 
-interface ISession {
-    authorId: number;
-    authorName: string;
-    users: number;
-}
-
-const MafiaSessions = () => {
+const MafiaHome = () => {
     const [isRendered, setIsRendered] = useState(false);
     const [sessions, setSessions] = useState<ISession[]>()
     const [join, setJoin] = useState<number|null>(null)
@@ -84,34 +80,8 @@ const MafiaSessions = () => {
                         <tr>
                             <td className="line" colSpan={4}></td>
                         </tr>
-                        {sessions && (
-                            sessions.map(session => <tr>
-                                <td><b className="profileB">{session.authorName}</b></td>
-                                <td><b className="profileB">{session.users}</b></td>
-                                <td>
-                                    <button onClick={() => sessionJoin(session.authorId)}>
-                                        <b className="profileB">Присоединиться</b>
-                                    </button>
-                                </td>
-                                {session.authorId === userId && (
-                                    <td>
-                                        <button onClick={() => exit(session)}>
-                                            <b className="profileB">Закрыть</b>
-                                        </button>
-                                    </td>
-                                )}
-                                {session.authorId !== userId && (
-                                    <td>
-                                        <button disabled={true}><b className="profileB">Закрыть</b></button>
-                                    </td>
-                                )}
-                            </tr>)
-                        )}
-                        {!sessions && (
-                            <tr>
-                                <td colSpan={3}><b className="profileB">Сессии не найдены</b></td>
-                            </tr>
-                        )}
+
+                        <MafiaSessions sessions={sessions} join={sessionJoin} exit={exit}/>
                     </>
                 )}
                 </tbody>
@@ -122,4 +92,4 @@ const MafiaSessions = () => {
     );
 };
 
-export default MafiaSessions;
+export default MafiaHome;

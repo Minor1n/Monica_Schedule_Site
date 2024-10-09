@@ -1,15 +1,12 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api, userId} from "../index";
-import LoadingScreen from "./LoadingScreen";
+import {api, userId} from "@index";
+import LoadingScreen from "@components/LoadingScreen";
+import ITheme from "@interfaces/ITheme";
 
 const lightSvg = new Map<0 | 1, string>([
     [0, '/images/sun.svg'],
     [1, '/images/moon.svg']
 ]);
-
-interface ITheme{
-    lightMode:0|1
-}
 
 const Theme = () => {
     const [isRendered, setIsRendered] = useState(false);

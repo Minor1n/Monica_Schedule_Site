@@ -1,27 +1,8 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api,userId} from "../index";
-import LoadingScreen from "./LoadingScreen";
-
-interface IUser{
-    name:string
-    groupName:string
-    duty:string
-    payment:string
-    refKey:string
-    refBonus:string
-    paymentAmount:string
-    groupOptions:string
-    dutyDayOptions:string
-}
-
-const TableRow: React.FC<{ label: string; value: React.ReactNode; children?: React.ReactNode }> = ({ label, value, children }) => (
-    <tr className="fiveHeight">
-        <td><b className="profileB">{label}</b></td>
-        <td><b className="profileB">{value}</b></td>
-        {children && <td><b className="profileB">{children}</b></td>}
-    </tr>
-);
-
+import {api,userId} from "@index";
+import LoadingScreen from "@components/LoadingScreen";
+import ProfileTableRow from "./ProfileTableRow";
+import IUser from "@interfaces/IUser";
 
 const Profile = () => {
     const [isRendered, setIsRendered] = useState(false);
@@ -87,34 +68,38 @@ const Profile = () => {
             <td><b className="profileB">Настроить</b></td>
         </tr>
         
-        <TableRow label="Группа:" value={user.groupName}>
+        <ProfileTableRow label="Группа:" value={user.groupName}>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
                     <select dangerouslySetInnerHTML={{__html: String(user.groupOptions)}} name="selectGroup" id="selectGroup"/>
                 </span>
             </form>
-        </TableRow>
-        <TableRow label="Имя:" value={user.name}>
+        </ProfileTableRow>
+
+        <ProfileTableRow label="Имя:" value={user.name}>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
                     <input className="inputP" type="text" id="nameUpdate" name="nameUpdate" onKeyDown={handleKeyDown} required/>
                 </span>
             </form>
-        </TableRow>
-        <TableRow label="День дежурства:" value={user.duty}>
+        </ProfileTableRow>
+
+        <ProfileTableRow label="День дежурства:" value={user.duty}>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
                     <select dangerouslySetInnerHTML={{__html: String(user.dutyDayOptions)}} name="selectDutyDay" id="selectDutyDay"/>
                 </span>
             </form>
-        </TableRow>
-        <TableRow label="Телеграм id:" value={userId}>
+        </ProfileTableRow>
+
+        <ProfileTableRow label="Телеграм id:" value={userId}>
             <i>Указывайте в комментарии платежа</i>
-        </TableRow>
-        <TableRow label="Статус оплаты:" value={user.payment}>
+        </ProfileTableRow>
+
+        <ProfileTableRow label="Статус оплаты:" value={user.payment}>
             Рассчитать сумму оплаты<br/>на несколько месяцев<br/>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
@@ -122,20 +107,24 @@ const Profile = () => {
                     <input type="text" id="monthPay" name="monthPay" onKeyDown={handleKeyDown} required/>
                 </span>
             </form>
-        </TableRow>
-        <TableRow label="Сумма оплаты с учетом рефералки:" value={`${user.paymentAmount}р`}>
+        </ProfileTableRow>
+
+        <ProfileTableRow label="Сумма оплаты с учетом рефералки:" value={`${user.paymentAmount}р`}>
             <a href="https://www.tinkoff.ru/rm/korop.aleksandr4/KHtiD43274">Перейти на страницу оплаты</a>
-        </TableRow>
-        <TableRow label="Реферальный ключ:" value={user.refKey}>
+        </ProfileTableRow>
+
+        <ProfileTableRow label="Реферальный ключ:" value={user.refKey}>
             <form className="form">
                 <img src="/images/pen.svg" alt="pen" className="pen"/>
                 <span>
                     <input className="inputP" type="text" id="refKey" name="refKey" onKeyDown={handleKeyDown} required/>
                 </span>
             </form>
-        </TableRow>
-        <TableRow label="Бонус рефералов:" value={`${user.refBonus}%`}/>
-        <TableRow label="Связь с админом:" value="@a_korop"/>
+        </ProfileTableRow>
+
+        <ProfileTableRow label="Бонус рефералов:" value={`${user.refBonus}%`}/>
+
+        <ProfileTableRow label="Связь с админом:" value="@a_korop"/>
 
         <tr className="fiveHeight">
             <td colSpan={2}></td>

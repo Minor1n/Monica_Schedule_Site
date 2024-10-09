@@ -1,10 +1,8 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api} from "../index";
-import LoadingScreen from "./LoadingScreen";
-
-interface ReplacementData {
-    table: string;
-}
+import {api} from "@index";
+import LoadingScreen from "@components/LoadingScreen";
+import Arrows from "@components/Arrows";
+import IReplacementData from "@interfaces/IReplacementData";
 
 let replacementPage = 0
 
@@ -14,14 +12,14 @@ const Replacement = () => {
 
     const load = async ()=>{
         const response = await fetch(`${api}/home/replacement/table?page=${replacementPage}`)
-        const data:ReplacementData = await response.json()
+        const data:IReplacementData = await response.json()
         if (data.table === 'null') return alert('Замены не найдены');
         setReplacement(data.table)
     }
 
     const changePage = (page:number) =>{
         fetch(`${api}/home/replacement/table?page=${page}`).then(response=>{
-            response.json().then((data:ReplacementData)=>{
+            response.json().then((data:IReplacementData)=>{
                 if (data.table === 'null') return alert('Замены не найдены');
                 replacementPage = page
                 setReplacement(data.table)
@@ -44,24 +42,7 @@ const Replacement = () => {
     }
     return (
         <div>
-            <table>
-                <tbody>
-                <tr className="line"></tr>
-                <tr>
-                    <td>
-                        <button onClick={replacementPageIncrement} className="arrow">
-                            <img src="/images/arrowLeft.svg" alt="arrowLeft"/>
-                        </button>
-                    </td>
-                    <td className="title"><b>Замены</b></td>
-                    <td>
-                        <button onClick={replacementPageDecrement} className="arrow">
-                            <img src="/images/arrowRight.svg" alt="arrowRight"/>
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <Arrows label="Замены" onButtonClickLeft={replacementPageIncrement} onButtonClickRight={replacementPageDecrement}/>
             <table dangerouslySetInnerHTML={{__html: replacement}}/>
         </div>
     );

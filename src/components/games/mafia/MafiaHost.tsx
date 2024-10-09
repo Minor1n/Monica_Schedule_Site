@@ -1,20 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {api, userId} from "../index";
-import LoadingScreen from "./LoadingScreen";
+import {api, userId} from "@index";
+import LoadingScreen from "@components/LoadingScreen";
 import {io, Socket} from "socket.io-client";
-
-
-interface IPlayer {
-    userId: string;
-    userName: string;
-    role: string;
-    isDeath: 'true'|'false';
-}
-
-interface IRole {
-    name: string;
-    count: number
-}
+import IPlayer from "@interfaces/IPlayer";
+import IRole from "@interfaces/IRole";
+import MafiaSelectRoles from "./MafiaSelectRoles";
+import MafiaHostPlayers from "./MafiaHostPlayers";
 
 const rolesNames = new Map<number,string>([
     [0,'Мирный житель'],
@@ -107,24 +98,7 @@ const MafiaHost = () => {
 
     return (
 <>
-    <form id="roles">
-        <table>
-            <tbody>
-            <tr>
-                <td colSpan={2}><b className="title">Укажите роли:</b></td>
-            </tr>
-            {roles && roles.map((role,index)=>
-                <tr>
-                    <td><b className="profileB">{role.name}</b></td>
-                    <td><input
-                        style={{height: '100%', width: '100%', fontSize: '3vw'}}
-                        min={0} type="number" id="role0" title='0'
-                        onChange={(e) => saveRoles(index, Number(e.target.value))} required/></td>
-                </tr>
-            )}
-            </tbody>
-        </table>
-    </form>
+    <MafiaSelectRoles roles={roles} onChange={saveRoles}/>
 
     <table>
         <tbody>
@@ -138,35 +112,8 @@ const MafiaHost = () => {
         </tbody>
     </table>
 
-    {players && (
-        <table>
-            <tbody>
-            <tr>
-                <td colSpan={3}><b className="title">Игроки:</b></td>
-            </tr>
-            {players.map((player:IPlayer) => (
-                player.isDeath === 'true' ? <tr style={{backgroundColor:'red'}}>
-                        <td><b className='profileB'>{player.userName}</b></td>
-                        <td><b className='profileB'>{player.role}</b></td>
-                        <td>
-                            <button style={{height:'100%',width:'100%'}} onClick={() => playerRelive(player.userId)}>
-                                <b className='profileB'>Возродить</b>
-                            </button>
-                        </td>
-                    </tr> :
-                    <tr>
-                        <td><b className='profileB'>{player.userName}</b></td>
-                        <td><b className='profileB'>{player.role}</b></td>
-                        <td>
-                            <button style={{height:'100%',width:'100%'}} onClick={() => playerKill(player.userId)}>
-                                <b className='profileB'>Убить</b>
-                            </button>
-                        </td>
-                    </tr>
-            ))}
-            </tbody>
-        </table>
-    )}
+    <MafiaHostPlayers players={players} kill={playerKill} relive={playerRelive}/>
+
     <table>
         <tbody>
         <tr>

@@ -1,16 +1,17 @@
-import './styles/main.css'
+import '@styles/main.css'
 import React, {useLayoutEffect, useState} from "react";
-import {api, userId} from "./index";
-import Home from "./components/Home";
-import Duty from "./components/Duty";
-import LoadingScreen from "./components/LoadingScreen";
-import Replacement from "./components/Replacement";
-import Other from "./components/Other";
-import Profile from "./components/Profile";
-import Settings from "./components/Settings";
+import {api, userId} from "@index";
+import Home from "@components/main/Home";
+import Duty from "@components/duty/Duty";
+import LoadingScreen from "@components/LoadingScreen";
+import Replacement from "@components/replacements/Replacement";
+import Other from "@components/other/Other";
+import Profile from "@components/profile/Profile";
+import Settings from "@components/settings/Settings";
+import Navigation from "@components/Navigation";
+import Buffer from "@components/Buffer";
 
 type VisibleSection = 'home'|'replacement'|'duty'|'other'|'profile'|'settings'
-
 
 const App = () => {
     const [isRendered, setIsRendered] = useState<boolean>(false);
@@ -41,8 +42,8 @@ const App = () => {
             <div className={visibleSection === 'profile' ? 'visible' : 'hidden'}><Profile/></div>
             <div className={visibleSection === 'settings' ? 'visible' : 'hidden'}><Settings/></div>
             <div className={visibleSection === 'other' ? 'visible' : 'hidden'}><Other/></div>
-            <div className="buf"></div>
-            <nav className="mobile-nav">
+            <Buffer/>
+            <Navigation>
                 <button onClick={() => showSection('home')} className="bloc-icon">
                     <img src="/images/home.svg" alt="home"/>
                 </button>
@@ -61,7 +62,7 @@ const App = () => {
                 <button onClick={() => showSection('other')} className="bloc-icon">
                     <img src="/images/burger.svg" alt="other"/>
                 </button>
-            </nav>
+            </Navigation>
         </div>
     );
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import Notifications from "./Notifications";
 import Theme from "./Theme";
 
-
 const Settings = () => {
     return (
 <div>
@@ -14,6 +13,7 @@ const Settings = () => {
         </tr>
         </tbody>
     </table>
+
     <Notifications/>
     <Theme/>
 </div>

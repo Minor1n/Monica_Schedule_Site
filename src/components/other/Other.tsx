@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MatrixDeterminant from './MatrixDeterminant';
 import MatrixMultiplication from './MatrixMultiplication';
 import MatrixInversion from './MatrixInversion';
-import MafiaSessions from "./MafiaSessions";
+import MafiaHome from "@components/games/mafia/MafiaHome";
 
 type VisibleSection = 'MatrixDeterminant' | 'MatrixMultiplication' | 'MatrixInversion' |  'Mafia' | null;
 
@@ -83,7 +83,7 @@ const Other = () => {
                 </div>
             )}
             {visibleSection === 'Mafia' && (
-                <MafiaSessions/>
+                <MafiaHome/>
             )}
             <div className="buf"/>
         </div>

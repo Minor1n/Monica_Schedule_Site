@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api, userId} from "../index";
-import LoadingScreen from "./LoadingScreen";
+import {api, userId} from "@index";
+import LoadingScreen from "@components/LoadingScreen";
 
 const GroupReplacement = () => {
     const [isRendered, setIsRendered] = useState(false);

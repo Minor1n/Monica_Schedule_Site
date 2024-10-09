@@ -1,6 +1,9 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api,userId} from "../index";
-import LoadingScreen from "./LoadingScreen";
+import {api,userId} from "@index";
+import LoadingScreen from "@components/LoadingScreen";
+import Arrows from "@components/Arrows";
+import Navigation from "@components/Navigation";
+import Buffer from "@components/Buffer";
 
 let dutyPage = 0
 
@@ -40,31 +43,14 @@ const Duty = () => {
     }
     return (
         <div>
-            <table>
-                <tbody>
-                <tr className="line"></tr>
-                <tr>
-                    <td>
-                        <button onClick={dutyIncrement} className="arrow">
-                            <img src="/images/arrowLeft.svg" alt="arrowLeft"/>
-                        </button>
-                    </td>
-                    <td className="title"><b>Дежурства</b></td>
-                    <td>
-                        <button onClick={dutyDecrement} className="arrow">
-                            <img src="/images/arrowRight.svg" alt="arrowRight"/>
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <Arrows label='Дежурства' onButtonClickLeft={dutyIncrement} onButtonClickRight={dutyDecrement}/>
             <table dangerouslySetInnerHTML={{__html: table}}/>
-            <div className="buf"></div>
-            <nav className="mobile-nav dutyButton">
+            <Buffer/>
+            <Navigation className="dutyButton">
                 <button onClick={dutyCheckIn} className="bloc-icon">
                     <b className="title">Отдежурил</b>
                 </button>
-            </nav>
+            </Navigation>
         </div>
     );
 };

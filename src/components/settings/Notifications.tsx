@@ -1,24 +1,13 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api,userId} from "../index";
-import LoadingScreen from "./LoadingScreen";
+import {api,userId} from "@index";
+import LoadingScreen from "@components/LoadingScreen";
+import INotifications from "@interfaces/INotifications";
+import INotificationsFields from "@interfaces/INotificationsFields";
 
 const bells = new Map<'on' | 'off', string>([
     ['off','/images/bellMute.svg'],
     ['on', '/images/bell.svg']
 ]);
-
-interface INotifications{
-    duty:'on'|'off'
-    replacement:'on'|'off'
-    schedule:'on'|'off'
-    groupReplacement:'on'|'off'
-}
-
-interface IFields {
-    label:string
-    onClick:()=>Promise<void>
-    notificationType:'on'|'off'
-}
 
 const Notifications = () => {
     const [isRendered, setIsRendered] = useState(false);
@@ -43,7 +32,7 @@ const Notifications = () => {
         }));
     };
 
-    const fields: IFields[] = [
+    const fields: INotificationsFields[] = [
         {
             label: "Появление нового расписания",
             onClick: () => toggleNotification('schedule'),

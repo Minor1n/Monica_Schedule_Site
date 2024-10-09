@@ -1,6 +1,7 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api, userId} from "../index";
-import LoadingScreen from "./LoadingScreen";
+import {api, userId} from "@index";
+import LoadingScreen from "@components/LoadingScreen";
+import IScheduleData from "@interfaces/IScheduleData";
 
 const Schedule = () => {
     const [isRendered, setIsRendered] = useState(false);
@@ -10,8 +11,8 @@ const Schedule = () => {
     const load = async ()=>{
         const response1 = await fetch(`${api}/home/schedule/table?user=${userId}`)
         const response2 = await fetch(`${api}/home/schedule/select?user=${userId}`)
-        const data1:{table:string} = await response1.json()
-        const data2:{table:string} = await response2.json()
+        const data1:IScheduleData = await response1.json()
+        const data2:IScheduleData = await response2.json()
         setTable(data1.table)
         setSelect(data2.table)
     }
@@ -40,7 +41,10 @@ const Schedule = () => {
                     <td className="title">
                         <b>Расписание</b>
                         <form name="myForm">
-                            <select dangerouslySetInnerHTML={{__html: select}} onChange={changeSchedule} name="selectGroupSchedule" id="selectGroupSchedule"/>
+                            <select dangerouslySetInnerHTML={{__html: select}}
+                                    onChange={changeSchedule}
+                                    name="selectGroupSchedule"
+                                    id="selectGroupSchedule"/>
                         </form>
                     </td>
                 </tr>
