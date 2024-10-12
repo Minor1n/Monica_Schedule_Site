@@ -25,7 +25,7 @@ const Notifications = () => {
     }
 
     const toggleNotification = async (type: keyof INotifications) => {
-        await fetch(`${api}/settings/notifications/${type}?user=${userId}`);
+        await fetch(`${api}/settings/notifications/${type}?user=${userId}`,{method:'POST'});
         setNotifications(prev => ({
             ...prev,
             [type]: prev[type] === 'on' ? 'off' : 'on'

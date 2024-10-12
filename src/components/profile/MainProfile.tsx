@@ -25,9 +25,9 @@ const MainProfile = () => {
         console.log(group, dutyDay, name, refKey, monthPay)
 
         const requests = [
-            fetch(`${api}/profile/settings/dutyDay?user=${userId}&day=${dutyDay}`),
-            fetch(`${api}/profile/settings/group?user=${userId}&group=${group}`),
-            name && fetch(`${api}/profile/settings/name?user=${userId}&name=${name}`),
+            fetch(`${api}/profile/settings/dutyDay?user=${userId}&day=${dutyDay}`,{method:'POST'}),
+            fetch(`${api}/profile/settings/group?user=${userId}&group=${group}`,{method:'POST'}),
+            name && fetch(`${api}/profile/settings/name?user=${userId}&name=${name}`,{method:'POST'}),
             monthPay && fetch(`${api}/profile/info/monthPay?user=${userId}&months=${monthPay}`)
                 .then(res => res.json())
                 .then(data => alert(data.alert)),
