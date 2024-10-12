@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {enter} from "@handlers/keyDown/enter";
 
 const MatrixMultiplication: React.FC = () => {
     const [rowsA, setRowsA] = useState(2);
@@ -73,18 +74,6 @@ const MatrixMultiplication: React.FC = () => {
         setSolutionSteps(stepsMatrix);
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            const form = e.currentTarget.form;
-            const index = Array.prototype.indexOf.call(form, e.currentTarget);
-            const nextElement = form?.elements[index + 1] as HTMLInputElement | null;
-            if (nextElement && nextElement.type !== 'submit') {
-                nextElement.focus();
-            }
-            e.preventDefault();
-        }
-    };
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         multiplyMatrices();
@@ -131,7 +120,7 @@ const MatrixMultiplication: React.FC = () => {
                                 setRowsA(newRows);
                                 handleMatrixResize(setMatrixA, newRows, colsA);
                             }}
-                            onKeyDown={handleKeyDown}
+                            onKeyDown={enter}
                             required
                         />
                     </td>
@@ -147,7 +136,7 @@ const MatrixMultiplication: React.FC = () => {
                                 setColsA(newCols);
                                 handleMatrixResize(setMatrixA, rowsA, newCols);
                             }}
-                            onKeyDown={handleKeyDown}
+                            onKeyDown={enter}
                             required
                         />
                     </td>
@@ -167,7 +156,7 @@ const MatrixMultiplication: React.FC = () => {
                                     type="number"
                                     value={value}
                                     onChange={(e) => handleInputChange(e, rowIndex, colIndex, "A")}
-                                    onKeyDown={handleKeyDown}
+                                    onKeyDown={enter}
                                     required
                                 />
                             </td>
@@ -203,7 +192,7 @@ const MatrixMultiplication: React.FC = () => {
                                 setRowsB(newRows);
                                 handleMatrixResize(setMatrixB, newRows, colsB);
                             }}
-                            onKeyDown={handleKeyDown}
+                            onKeyDown={enter}
                             required
                         />
                     </td>
@@ -219,7 +208,7 @@ const MatrixMultiplication: React.FC = () => {
                                 setColsB(newCols);
                                 handleMatrixResize(setMatrixB, rowsB, newCols);
                             }}
-                            onKeyDown={handleKeyDown}
+                            onKeyDown={enter}
                             required
                         />
                     </td>
@@ -239,7 +228,7 @@ const MatrixMultiplication: React.FC = () => {
                                     type="number"
                                     value={value}
                                     onChange={(e) => handleInputChange(e, rowIndex, colIndex, "B")}
-                                    onKeyDown={handleKeyDown}
+                                    onKeyDown={enter}
                                     required
                                 />
                             </td>

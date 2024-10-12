@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {enter} from "@handlers/keyDown/enter";
 
 const calculateDeterminant = (matrix: number[][], steps: React.JSX.Element[]): number => {
     const n = matrix.length;
@@ -85,18 +86,6 @@ const MatrixDeterminant = () => {
         calculate();
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            const form = e.currentTarget.form;
-            const index = Array.prototype.indexOf.call(form, e.currentTarget);
-            const nextElement = form?.elements[index + 1] as HTMLInputElement | null;
-            if (nextElement && nextElement.type !== 'submit') {
-                nextElement.focus();
-            }
-            e.preventDefault();
-        }
-    };
-
     const clearMatrix = () => {
         setMatrix(Array(order).fill(Array(order).fill('')));
         setDeterminant(null);
@@ -133,7 +122,7 @@ const MatrixDeterminant = () => {
                                         type="number"
                                         value={cell}
                                         onChange={(e) => handleInputChange(rowIndex, colIndex, e.target.value)}
-                                        onKeyDown={handleKeyDown}
+                                        onKeyDown={enter}
                                         required
                                     />
                                 </td>

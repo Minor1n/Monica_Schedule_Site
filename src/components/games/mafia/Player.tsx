@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import { userId, api } from '@index';
-import {io, Socket } from 'socket.io-client';
+import {io} from 'socket.io-client';
 import LoadingScreen from '@components/LoadingScreen';
 import PlayerPlayers from "./PlayerPlayers";
 import IPlayer from "@interfaces/IPlayer";
@@ -8,13 +8,11 @@ import IMafiaPlayer from "@interfaces/components/IMafiaPlayer";
 
 const Player:React.FC<IMafiaPlayer> = ({sessionId}) => {
     const [isRendered, setIsRendered] = useState(false);
-    const [socket, setSocket] = useState<Socket | null>(null);
     const [players, setPlayers] = useState<IPlayer[]>()
     const [player, setPlayer] = useState<IPlayer>()
 
     useEffect(() => {
         const newSocket = io(api);
-        setSocket(newSocket);
         newSocket.emit('joinPlayer',{
             userId,
             socketId:newSocket.id,

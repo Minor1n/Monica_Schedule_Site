@@ -1,8 +1,8 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api,userId} from "@index";
 import LoadingScreen from "@components/LoadingScreen";
 import INotifications from "@interfaces/INotifications";
 import INotificationsFields from "@interfaces/INotificationsFields";
+import axios from "@axios";
 
 const bells = new Map<'on' | 'off', string>([
     ['off','/images/bellMute.svg'],
@@ -19,13 +19,12 @@ const Notifications = () => {
     })
 
     const load = async () => {
-        const response = await fetch(`${api}/settings/notifications/table?user=${userId}`)
-        const data:INotifications = await response.json()
+        const data = await axios.settings.notification.table()
         setNotifications(data)
     }
 
     const toggleNotification = async (type: keyof INotifications) => {
-        await fetch(`${api}/settings/notifications/${type}?user=${userId}`,{method:'POST'});
+        await axios.settings.notification[type]()
         setNotifications(prev => ({
             ...prev,
             [type]: prev[type] === 'on' ? 'off' : 'on'

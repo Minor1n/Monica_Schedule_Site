@@ -1,6 +1,5 @@
 import '@styles/main.css'
 import React, {useLayoutEffect, useState} from "react";
-import {api, userId} from "@index";
 import MainHome from "@components/home/MainHome";
 import MainDuty from "@components/duty/MainDuty";
 import MainReplacement from "@components/replacements/MainReplacement";
@@ -10,6 +9,7 @@ import MainSettings from "@components/settings/MainSettings";
 import LoadingScreen from "@components/LoadingScreen";
 import Navigation from "@components/Navigation";
 import Buffer from "@components/Buffer";
+import axios from "@axios";
 
 type VisibleSection = 'home'|'replacement'|'duty'|'other'|'profile'|'settings'
 
@@ -22,8 +22,7 @@ const App = () => {
     };
 
     const load = async ()=>{
-        const response = await fetch(`${api}/gradient?user=${userId}`)
-        const data:{gradient:string} = await response.json()
+        const data = await axios.gradient()
         document.body.style.backgroundImage = data.gradient;
     }
 

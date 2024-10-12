@@ -1,7 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api, userId} from "@index";
 import LoadingScreen from "@components/LoadingScreen";
-import IScheduleData from "@interfaces/IScheduleData";
+import axios from "@axios";
 
 const Schedule = () => {
     const [isRendered, setIsRendered] = useState(false);
@@ -9,21 +8,16 @@ const Schedule = () => {
     const [select, setSelect] = useState<string>('')
 
     const load = async ()=>{
-        const response1 = await fetch(`${api}/home/schedule/table?user=${userId}`)
-        const response2 = await fetch(`${api}/home/schedule/select?user=${userId}`)
-        const data1:IScheduleData = await response1.json()
-        const data2:IScheduleData = await response2.json()
+        const data1 = await axios.home.schedule.table()
+        const data2 = await axios.home.schedule.select()
         setTable(data1.table)
         setSelect(data2.table)
     }
 
-    const changeSchedule = () => {
+    const changeSchedule = async () => {
         const selectedValue = (document.getElementById('selectGroupSchedule') as HTMLSelectElement).value;
-        fetch(`${api}/home/schedule/update?group=${selectedValue}`).then(response=>{
-            response.json().then((data:{table:string})=>{
-                setTable(data.table)
-            })
-        })
+        const data = await axios.home.schedule.update(selectedValue)
+        setTable(data.table)
     };
 
     useLayoutEffect(() => {

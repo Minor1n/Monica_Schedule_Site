@@ -5,7 +5,9 @@
       "@index": ["./index.tsx"],
       "@components/*": ["./components/*"],
       "@interfaces/*": ["./interfaces/*"],
-      "@styles/*": ["./styles/*"]
+      "@styles/*": ["./styles/*"],
+      "@axios": ["./utils/axios.ts"],
+      "@handlers/*": ["./handlers/*"]
     }
   }
 }

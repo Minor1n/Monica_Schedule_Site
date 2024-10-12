@@ -1,9 +1,9 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api,userId} from "@index";
 import LoadingScreen from "@components/LoadingScreen";
 import Arrows from "@components/Arrows";
 import Navigation from "@components/Navigation";
 import Buffer from "@components/Buffer";
+import axios from "@axios";
 
 let dutyPage = 0
 
@@ -12,14 +12,12 @@ const MainDuty = () => {
     const [table, setTable] = useState<string>('')
 
     const load = async ()=>{
-        const response = await fetch(`${api}/duty/table?user=${userId}&page=${dutyPage}`)
-        const data:{table:string} = await response.json()
+        const data = await axios.duty.table(dutyPage)
         setTable(data.table)
     }
 
     const dutyCheckIn = async () => {
-        const response = await fetch(`${api}/duty/checkin?user=${userId}`)
-        const data = await response.json();
+        const data = await axios.duty.checkin()
         alert(data.alert)
         await load()
     }

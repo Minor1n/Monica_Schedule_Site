@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {enter} from "@handlers/keyDown/enter";
 
 type Matrix = (string | number)[][];
 
@@ -123,18 +124,6 @@ const MatrixInversion: React.FC = () => {
         setMatrix(updatedMatrix);
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            const form = e.currentTarget.form;
-            const index = Array.prototype.indexOf.call(form, e.currentTarget);
-            const nextElement = form?.elements[index + 1] as HTMLInputElement | null;
-            if (nextElement && nextElement.type !== 'submit') {
-                nextElement.focus();
-            }
-            e.preventDefault();
-        }
-    };
-
     const clearMatrix = () => {
         setMatrix(Array(size).fill(Array(size).fill('')));
         setInverse(null);
@@ -164,7 +153,7 @@ const MatrixInversion: React.FC = () => {
                                 type="number"
                                 value={size}
                                 min={1}
-                                onKeyDown={handleKeyDown}
+                                onKeyDown={enter}
                                 onChange={handleSizeChange}
                                 style={{ width: '50px', marginLeft: '10px' }}
                                 required
@@ -186,7 +175,7 @@ const MatrixInversion: React.FC = () => {
                                     type="number"
                                     value={value}
                                     onChange={(e) => handleChange(e, rowIndex, colIndex)}
-                                    onKeyDown={handleKeyDown}
+                                    onKeyDown={enter}
                                     required
                                 />
                             </td>

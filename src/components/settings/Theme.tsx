@@ -1,7 +1,7 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api, userId} from "@index";
 import LoadingScreen from "@components/LoadingScreen";
 import ITheme from "@interfaces/ITheme";
+import axios from "@axios";
 
 const lightSvg = new Map<0 | 1, string>([
     [0, '/images/sun.svg'],
@@ -15,26 +15,24 @@ const Theme = () => {
     })
 
     const updateBackground = async () => {
-        const response = await fetch(`${api}/gradient?user=${userId}`);
-        const data = await response.json();
+        const data = await axios.gradient()
         document.body.style.backgroundImage = data.gradient;
     };
 
     const updateTheme = async (url: string) => {
-        await fetch(`${api}/settings/theme/background?user=${userId}&url=${url}`, { method: 'POST' });
+        await axios.settings.theme.background(url)
         await updateBackground();
     };
 
     const toggleLightMode = async () => {
-        await fetch(`${api}/settings/theme/lightMode?user=${userId}`, { method: 'POST' });
+        await axios.settings.theme.lightMode()
         setTheme(prev => ({ lightMode: prev.lightMode === 0 ? 1 : 0 }));
         await updateBackground();
     };
 
 
     const load = async () => {
-        const response = await fetch(`${api}/settings/theme/table?user=${userId}`)
-        const data:ITheme = await response.json()
+        const data = await axios.settings.theme.table()
         setTheme(data)
     }
 

@@ -23,7 +23,7 @@ const Host = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [players, setPlayers] = useState<IPlayer[]>()
     const [roles, setRoles] = useState<IRole[]>(
-        Array.from(rolesNames, ([id, name]) => ({
+        Array.from(rolesNames, ([_, name]) => ({
             name: name ?? 'Роль не найдена',
             count: 0,
         }))

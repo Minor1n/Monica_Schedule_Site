@@ -1,8 +1,7 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api} from "@index";
 import LoadingScreen from "@components/LoadingScreen";
 import Arrows from "@components/Arrows";
-import IReplacementData from "@interfaces/IReplacementData";
+import axios from "@axios";
 
 let replacementPage = 0
 
@@ -11,26 +10,22 @@ const MainReplacement = () => {
     const [replacement, setReplacement] = useState<string>('')
 
     const load = async ()=>{
-        const response = await fetch(`${api}/home/replacement/table?page=${replacementPage}`)
-        const data:IReplacementData = await response.json()
+        const data = await axios.home.replacement.table(replacementPage)
         if (data.table === 'null') return alert('Замены не найдены');
         setReplacement(data.table)
     }
 
-    const changePage = (page:number) =>{
-        fetch(`${api}/home/replacement/table?page=${page}`).then(response=>{
-            response.json().then((data:IReplacementData)=>{
-                if (data.table === 'null') return alert('Замены не найдены');
-                replacementPage = page
-                setReplacement(data.table)
-            })
-        })
+    const changePage = async (page:number) =>{
+        const data = await axios.home.replacement.table(page)
+        if (data.table === 'null') return alert('Замены не найдены');
+        replacementPage = page
+        setReplacement(data.table)
     }
-    const replacementPageIncrement =()=>{
-        changePage(replacementPage+1)
+    const replacementPageIncrement = async ()=>{
+        await changePage(replacementPage+1)
     }
-    const replacementPageDecrement =()=>{
-        changePage(replacementPage-1)
+    const replacementPageDecrement = async ()=>{
+        await changePage(replacementPage-1)
     }
 
     useLayoutEffect(()=>{

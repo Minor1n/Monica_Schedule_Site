@@ -1,10 +1,11 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api, userId} from "@index";
+import {userId} from "@index";
 import LoadingScreen from "@components/LoadingScreen";
 import Host from "./Host";
 import Player from "./Player";
 import Sessions from "./Sessions";
 import ISession from "@interfaces/ISession";
+import axios from "@axios";
 
 const MainMafia = () => {
     const [isRendered, setIsRendered] = useState(false);
@@ -12,14 +13,12 @@ const MainMafia = () => {
     const [join, setJoin] = useState<number|null>(null)
 
     const setSessionsF = async ():Promise<void> =>{
-        const response = await fetch(`${api}/games/mafia/sessions`)
-        const data:ISession[] = await response.json()
+        const data = await axios.games.mafia.sessions()
         setSessions(data)
     }
 
     const exit = async (session:ISession)=>{
-        const response = await fetch(`${api}/games/mafia/exit?user=${session.authorId}`)
-        const data:ISession[] = await response.json()
+        const data = await axios.games.mafia.exit(session.authorId)
         setSessions(data)
     }
 

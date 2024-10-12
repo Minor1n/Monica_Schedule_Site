@@ -1,40 +1,36 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {api,userId} from "@index";
+import {userId} from "@index";
 import LoadingScreen from "@components/LoadingScreen";
 import TableRow from "./TableRow";
 import IUser from "@interfaces/IUser";
+import axios from "@axios";
 
 const MainProfile = () => {
     const [isRendered, setIsRendered] = useState(false);
     const [user, setUser] = useState<IUser>();
 
     const setUserF = async ():Promise<void> =>{
-        const response = await fetch(`${api}/profile/info/table?user=${userId}`)
-        const data:IUser = await response.json()
+        const data = await axios.profile.info.table()
         setUser(data)
     }
 
     const update = async (e: React.KeyboardEvent<HTMLInputElement>|React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const group = (document.getElementById('selectGroup') as HTMLSelectElement).value;
-        const dutyDay = (document.getElementById('selectDutyDay') as HTMLSelectElement).value;
+        const dutyDay = Number((document.getElementById('selectDutyDay') as HTMLSelectElement).value);
         const name = (document.getElementById('nameUpdate') as HTMLInputElement).value.trim();
         const refKey = (document.getElementById('refKey') as HTMLInputElement).value.trim();
-        const monthPay = (document.getElementById('monthPay') as HTMLInputElement).value.trim();
+        const monthPay = Number((document.getElementById('monthPay') as HTMLInputElement).value.trim());
 
         console.log(group, dutyDay, name, refKey, monthPay)
 
         const requests = [
-            fetch(`${api}/profile/settings/dutyDay?user=${userId}&day=${dutyDay}`,{method:'POST'}),
-            fetch(`${api}/profile/settings/group?user=${userId}&group=${group}`,{method:'POST'}),
-            name && fetch(`${api}/profile/settings/name?user=${userId}&name=${name}`,{method:'POST'}),
-            monthPay && fetch(`${api}/profile/info/monthPay?user=${userId}&months=${monthPay}`)
-                .then(res => res.json())
-                .then(data => alert(data.alert)),
-            refKey && fetch(`${api}/profile/info/refKey?user=${userId}&refKey=${refKey}`)
-                .then(res => res.json())
-                .then(data => alert(data.alert)),
-        ].filter(Boolean) as Promise<Response>[];
+            axios.profile.settings.dutyDay(dutyDay),
+            axios.profile.settings.group(group),
+            name && axios.profile.settings.name(name),
+            monthPay && axios.profile.info.monthPay(monthPay).then(data => alert(data.alert)),
+            refKey && axios.profile.info.refKey(refKey).then(data => alert(data.alert)),
+        ].filter(Boolean) as unknown as Promise<Response>[];
 
         await Promise.all(requests);
         await setUserF()
