@@ -6,12 +6,13 @@ import MainReplacement from "@components/replacements/MainReplacement";
 import MainOther from "@components/other/MainOther";
 import MainProfile from "@components/profile/MainProfile";
 import MainSettings from "@components/settings/MainSettings";
+import MainGames from "@components/games/MainGames";
 import LoadingScreen from "@components/LoadingScreen";
 import Navigation from "@components/Navigation";
 import Buffer from "@components/Buffer";
 import axios from "@axios";
 
-type VisibleSection = 'home'|'replacement'|'duty'|'other'|'profile'|'settings'
+type VisibleSection = 'home'|'replacement'|'duty'|'other'|'profile'|'settings'|'games'
 
 const App = () => {
     const [isRendered, setIsRendered] = useState<boolean>(false);
@@ -42,26 +43,27 @@ const App = () => {
     return (
         <div className='fill'>
             {paymentStatus !== 0 && (
-            <>
-                <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><MainHome/></div>
-                <div className={visibleSection === 'replacement' ? 'visible' : 'hidden'}><MainReplacement/></div>
-            </>
+                <>
+                    <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><MainHome/></div>
+                    <div className={visibleSection === 'replacement' ? 'visible' : 'hidden'}><MainReplacement/></div>
+                </>
             )}
             <div className={visibleSection === 'duty' ? 'visible' : 'hidden'}><MainDuty/></div>
             <div className={visibleSection === 'profile' ? 'visible' : 'hidden'}><MainProfile/></div>
             <div className={visibleSection === 'settings' ? 'visible' : 'hidden'}><MainSettings/></div>
             <div className={visibleSection === 'other' ? 'visible' : 'hidden'}><MainOther/></div>
+            <div className={visibleSection === 'games' ? 'visible' : 'hidden'}><MainGames/></div>
             <Buffer/>
             <Navigation>
                 {paymentStatus !== 0 && (
-                <>
-                    <button onClick={() => showSection('home')} className="bloc-icon">
-                        <img src="/images/home.svg" alt="home"/>
-                    </button>
-                    <button onClick={() => showSection('replacement')} className="bloc-icon">
-                        <img src="/images/replacement.svg" alt="replacement"/>
-                    </button>
-                </>
+                    <>
+                        <button onClick={() => showSection('home')} className="bloc-icon">
+                            <img src="/images/home.svg" alt="home"/>
+                        </button>
+                        <button onClick={() => showSection('replacement')} className="bloc-icon">
+                            <img src="/images/replacement.svg" alt="replacement"/>
+                        </button>
+                    </>
                 )}
                 <button onClick={() => showSection('duty')} className="bloc-icon">
                     <img src="/images/duty.svg" alt="duty" className='widthTen'/>
@@ -74,6 +76,9 @@ const App = () => {
                 </button>
                 <button onClick={() => showSection('other')} className="bloc-icon">
                     <img src="/images/burger.svg" alt="other"/>
+                </button>
+                <button onClick={() => showSection('games')} className="bloc-icon">
+                    <img src="/images/gamepad.svg" alt="games"/>
                 </button>
             </Navigation>
         </div>

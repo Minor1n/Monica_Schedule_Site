@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import MatrixDeterminant from './MatrixDeterminant';
 import MatrixMultiplication from './MatrixMultiplication';
 import MatrixInversion from './MatrixInversion';
-import MainMafia from "@components/games/mafia/MainMafia";
+import Buffer from "@components/Buffer";
 
-type VisibleSection = 'MatrixDeterminant' | 'MatrixMultiplication' | 'MatrixInversion' |  'Mafia' | null;
+type VisibleSection = 'MatrixDeterminant' | 'MatrixMultiplication' | 'MatrixInversion' | null;
 
 const MainOther = () => {
     const [visibleSection, setVisibleSection] = useState<VisibleSection>(null);
@@ -19,55 +19,46 @@ const MainOther = () => {
 
     return (
         <div>
-            {visibleSection !== 'Mafia' && (
-                <table>
-                    <tbody>
-                    <tr>
-                        <td className="line"></td>
-                    </tr>
-                    <tr>
-                        <td className="title">
-                            <b>Прочий функционал</b>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="line"></td>
-                    </tr>
-                    <tr>
-                        <td className="line"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button onClick={() => showSection('MatrixDeterminant')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
-                                <b style={{fontSize: '3.5vw', padding: '1vw'}}>Калькулятор определителя матрицы</b>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='profileB'>
-                            <button onClick={() => showSection('MatrixMultiplication')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
-                                <b style={{fontSize: '3.5vw', padding: '1vw'}}>Калькулятор произведения матриц</b>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button onClick={() => showSection('MatrixInversion')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
-                                <b style={{fontSize: '3.5vw', padding: '1vw'}}>Калькулятор обратной матрицы</b>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button onClick={() => showSection('Mafia')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
-                                <b style={{fontSize: '3.5vw', padding: '1vw'}}>Мафия</b>
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            )}
-            {visibleSection && visibleSection !== 'Mafia' && (
+            <table>
+                <tbody>
+                <tr>
+                    <td className="line"></td>
+                </tr>
+                <tr>
+                    <td className="title">
+                        <b>Прочий функционал</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="line"></td>
+                </tr>
+                <tr>
+                    <td className="line"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onClick={() => showSection('MatrixDeterminant')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
+                            <b style={{fontSize: '3.5vw', padding: '1vw'}}>Калькулятор определителя матрицы</b>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td className='profileB'>
+                        <button onClick={() => showSection('MatrixMultiplication')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
+                            <b style={{fontSize: '3.5vw', padding: '1vw'}}>Калькулятор произведения матриц</b>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onClick={() => showSection('MatrixInversion')} className="bloc-icon" style={{ height: '100%', width: '100%', textAlign:'left'}}>
+                            <b style={{fontSize: '3.5vw', padding: '1vw'}}>Калькулятор обратной матрицы</b>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            {visibleSection && (
                 <div className="modal-overlay">
                     <div className="modal-content">
                         <button className="close-button" onClick={closeModal}>
@@ -82,10 +73,7 @@ const MainOther = () => {
                     </div>
                 </div>
             )}
-            {visibleSection === 'Mafia' && (
-                <MainMafia/>
-            )}
-            <div className="buf"/>
+            <Buffer/>
         </div>
     );
 };
