@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import MainMafia from "@components/games/mafia/MainMafia";
 import Buffer from "@components/Buffer";
 
@@ -6,6 +6,10 @@ type VisibleSection = 'Mafia' | null
 
 const MainGames = () => {
     const [visibleSection, setVisibleSection] = useState<VisibleSection>(null);
+
+    useEffect(() => {
+        setVisibleSection(null)
+    }, []);
 
     const showSection = (section: VisibleSection) => {
         setVisibleSection(section);
