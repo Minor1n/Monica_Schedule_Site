@@ -8,6 +8,7 @@ import ISession from "@interfaces/ISession";
 import IUser from "@interfaces/IUser";
 import INotifications from "@interfaces/INotifications";
 import ITheme from "@interfaces/ITheme";
+import IStatus from "@interfaces/axios/IStatus";
 
 const fetchData = async <T>(endpoint: string): Promise<T> => {
     const res = await axios.get(`${api}/${endpoint}`);
@@ -20,6 +21,7 @@ const postData = async (endpoint: string, params: string) => {
 
 const config = {
     gradient: async (): Promise<IGradient> => fetchData<IGradient>(`gradient?user=${userId}`),
+    paymentStatus: async (): Promise<IStatus> => fetchData<IStatus>(`paymentStatus?user=${userId}`),
     home: {
         schedule: {
             table: async (): Promise<ITable> => fetchData<ITable>(`home/schedule/table?user=${userId}`),

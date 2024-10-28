@@ -16,6 +16,7 @@ type VisibleSection = 'home'|'replacement'|'duty'|'other'|'profile'|'settings'
 const App = () => {
     const [isRendered, setIsRendered] = useState<boolean>(false);
     const [visibleSection, setVisibleSection] = useState<VisibleSection>('home');
+    const [paymentStatus, setPaymentStatus] = useState<number>(0)
 
     const showSection = (section: VisibleSection) => {
         setVisibleSection(section);
@@ -24,6 +25,11 @@ const App = () => {
     const load = async ()=>{
         const data = await axios.gradient()
         document.body.style.backgroundImage = data.gradient;
+        const payment = await axios.paymentStatus()
+        if(payment.status === 0) {
+            setVisibleSection('duty')
+        }
+        setPaymentStatus(payment.status)
     }
 
     useLayoutEffect(() => {
@@ -35,20 +41,28 @@ const App = () => {
     }
     return (
         <div className='fill'>
-            <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><MainHome/></div>
-            <div className={visibleSection === 'replacement' ? 'visible' : 'hidden'}><MainReplacement/></div>
+            {paymentStatus !== 0 && (
+            <>
+                <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><MainHome/></div>
+                <div className={visibleSection === 'replacement' ? 'visible' : 'hidden'}><MainReplacement/></div>
+            </>
+            )}
             <div className={visibleSection === 'duty' ? 'visible' : 'hidden'}><MainDuty/></div>
             <div className={visibleSection === 'profile' ? 'visible' : 'hidden'}><MainProfile/></div>
             <div className={visibleSection === 'settings' ? 'visible' : 'hidden'}><MainSettings/></div>
             <div className={visibleSection === 'other' ? 'visible' : 'hidden'}><MainOther/></div>
             <Buffer/>
             <Navigation>
-                <button onClick={() => showSection('home')} className="bloc-icon">
-                    <img src="/images/home.svg" alt="home"/>
-                </button>
-                <button onClick={() => showSection('replacement')} className="bloc-icon">
-                    <img src="/images/replacement.svg" alt="replacement"/>
-                </button>
+                {paymentStatus !== 0 && (
+                <>
+                    <button onClick={() => showSection('home')} className="bloc-icon">
+                        <img src="/images/home.svg" alt="home"/>
+                    </button>
+                    <button onClick={() => showSection('replacement')} className="bloc-icon">
+                        <img src="/images/replacement.svg" alt="replacement"/>
+                    </button>
+                </>
+                )}
                 <button onClick={() => showSection('duty')} className="bloc-icon">
                     <img src="/images/duty.svg" alt="duty" className='widthTen'/>
                 </button>
