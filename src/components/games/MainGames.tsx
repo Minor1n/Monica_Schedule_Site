@@ -15,6 +15,10 @@ const MainGames = () => {
         setVisibleSection(section);
     };
 
+    const closeModal = () => {
+        setVisibleSection(null);
+    };
+
     return (
         <div>
             {!visibleSection &&
@@ -45,8 +49,18 @@ const MainGames = () => {
                     </tbody>
                 </table>)
             }
-            {visibleSection === 'Mafia' && (
-                <MainMafia/>
+            {visibleSection && (
+                <div className="modal-overlay" style={{background:'unset'}}>
+                    <div className="modal-content" style={{padding:0,borderRadius:0,width:'100%',height:'100%',maxHeight:'100%',background:'unset'}}>
+                        <button className="close-button" onClick={closeModal} style={{ top: '2.5vw',right:'2.5vw'}}>
+                            &times;
+                        </button>
+
+                        <div className="modal-body" style={{height:'100%',maxHeight:'100%'}}>
+                            {visibleSection === 'Mafia' && <MainMafia/>}
+                        </div>
+                    </div>
+                </div>
             )}
             <Buffer/>
         </div>
