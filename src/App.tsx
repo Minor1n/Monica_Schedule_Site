@@ -63,13 +63,13 @@ const App = () => {
             <div className={visibleSection === 'games' ? 'visible' : 'hidden'}><MainGames/></div>
             <div>
                 <Burger className={`${visibleBurger ? 'burger-slide-up' : ''}`} length={3}>
-                    <NavigationButton src='/images/profile.svg' alt='profile' onClick={() => {
+                    <NavigationButton src='/images/profile.svg' alt='profile' padding={6} onClick={() => {
                         showSection('profile');
                     }}/>
-                    <NavigationButton src='/images/gamepad.svg' alt='games' onClick={() => {
+                    <NavigationButton src='/images/gamepad.svg' alt='games' padding={6} onClick={() => {
                         showSection('games');
                     }}/>
-                    <NavigationButton src='/images/threeDots.svg' alt='other' onClick={() => {
+                    <NavigationButton src='/images/threeDots.svg' alt='other' padding={6} onClick={() => {
                         showSection('other');
                     }}/>
                 </Burger>
@@ -78,21 +78,21 @@ const App = () => {
             <Navigation>
                 {paymentStatus !== 0 && (
                     <>
-                        <NavigationButton src='/images/home.svg' alt='home' onClick={() => {
+                        <NavigationButton src='/images/home.svg' alt='home' padding={2} onClick={() => {
                             showSection('home')
                         }}/>
-                        <NavigationButton src='/images/replacement.svg' alt='replacement' onClick={() => {
+                        <NavigationButton src='/images/replacement.svg' alt='replacement' padding={2} onClick={() => {
                             showSection('replacement')
                         }}/>
                     </>
                 )}
-                <NavigationButton className='widthTen' src='/images/duty.svg' alt='duty' onClick={() => {
+                <NavigationButton className='widthTen' src='/images/duty.svg' alt='duty' padding={2} onClick={() => {
                     showSection('duty')
                 }}/>
-                <NavigationButton src='/images/settings.svg' alt='settings' onClick={()=>{
+                <NavigationButton src='/images/settings.svg' alt='settings' padding={2} onClick={()=>{
                     showSection('settings')
                 }}/>
-                <NavigationButton src='/images/burger.svg' alt='burger' onClick={() => {
+                <NavigationButton src='/images/burger.svg' alt='burger' padding={2} onClick={() => {
                     showBurger(!visibleBurger)
                 }}/>
             </Navigation>

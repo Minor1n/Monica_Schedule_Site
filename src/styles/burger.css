@@ -2,13 +2,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 12vw;
+    width: 20vw;
     min-height: 12vw;
     position: fixed;
     bottom: -100%;
     right: 0;
     background: rgba(255, 255, 255, 0.7);
-    border-top-left-radius: 10px;
+    border-top-left-radius: 3vw;
     transition: bottom 0.3s ease-out;
 }
 
