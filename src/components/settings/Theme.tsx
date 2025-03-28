@@ -15,8 +15,8 @@ const Theme = () => {
     })
 
     const updateBackground = async () => {
-        const data = await axios.gradient()
-        document.body.style.backgroundImage = data.gradient;
+        const data = await axios.settings.theme.table()
+        document.body.style.backgroundImage = `url("/images/background-${data.lightMode===1?'dark':'light'}.jpg")`;
     };
 
     const updateTheme = async (url: string) => {

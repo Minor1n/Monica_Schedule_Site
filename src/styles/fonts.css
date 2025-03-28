@@ -1,0 +1,9 @@
+@font-face {
+    font-family: Unbounded-Bold;
+    src: url('fonts/Unbounded-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url('fonts/Montserrat-Regular.ttf') format('truetype');
+}

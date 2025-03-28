@@ -13,6 +13,9 @@ import NavigationButton from "@components/NavigationButton";
 import LoadingScreen from "@components/LoadingScreen";
 import Buffer from "@components/Buffer";
 import axios from "@axios";
+import Header from "@components/Header";
+import '@styles/header.css'
+import '@styles/fonts.css'
 
 type VisibleSection = 'home'|'replacement'|'duty'|'other'|'profile'|'settings'|'games'|'burger'
 
@@ -32,8 +35,8 @@ const App = () => {
     }
 
     const load = async ()=>{
-        const data = await axios.gradient()
-        document.body.style.backgroundImage = data.gradient;
+        const data = await axios.settings.theme.table()
+        document.body.style.backgroundImage = `url("/images/background-${data.lightMode===1?'dark':'light'}.jpg")`;
         const payment = await axios.paymentStatus()
         if(payment.status === 0) {
             setVisibleSection('duty')
@@ -50,6 +53,8 @@ const App = () => {
     }
     return (
         <div className='fill'>
+            <Header/>
+            <div className='header-buffer'/>
             {paymentStatus !== 0 && (
                 <>
                     <div className={visibleSection === 'home' ? 'visible' : 'hidden'}><MainHome/></div>
@@ -89,7 +94,7 @@ const App = () => {
                 <NavigationButton className='widthTen' src='/images/duty.svg' alt='duty' padding={2} onClick={() => {
                     showSection('duty')
                 }}/>
-                <NavigationButton src='/images/settings.svg' alt='settings' padding={2} onClick={()=>{
+                <NavigationButton src='/images/settings.svg' alt='settings' padding={2} onClick={() => {
                     showSection('settings')
                 }}/>
                 <NavigationButton src='/images/burger.svg' alt='burger' padding={2} onClick={() => {
