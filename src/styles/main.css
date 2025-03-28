@@ -84,7 +84,7 @@ button {
 select {
     all: unset;
     scrollbar-width: none;
-    font-size: 35px;
+    font-size: 4.5vw;
 }
 form {
     display: inline;
