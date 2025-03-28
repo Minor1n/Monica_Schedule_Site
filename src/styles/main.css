@@ -12,7 +12,7 @@ body {
     background-attachment: fixed;
     height: 100vh;
     background-color: rgba(255, 255, 255, 0.1);
-    /*width: fit-content;*/
+    width: fit-content;
 }
 body:before {
     content: "";
@@ -42,7 +42,7 @@ body:before {
 }
 table {
     padding: 1vw;
-    min-width: 100vw;
+    /*min-width: 100vw;*/
     width: 100%;
 }
 td {
