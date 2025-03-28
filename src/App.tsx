@@ -67,15 +67,18 @@ const App = () => {
             <div className={visibleSection === 'other' ? 'visible' : 'hidden'}><MainOther/></div>
             <div className={visibleSection === 'games' ? 'visible' : 'hidden'}><MainGames/></div>
             <div>
-                <Burger className={`${visibleBurger ? 'burger-slide-up' : ''}`} length={3}>
-                    <NavigationButton src='/images/profile.svg' alt='profile' padding={6} onClick={() => {
-                        showSection('profile');
-                    }}/>
+                <Burger className={`${visibleBurger ? 'burger-slide-up' : ''}`} length={2}>
+                    {/*<NavigationButton src='/images/profile.svg' alt='profile' padding={6} onClick={() => {*/}
+                    {/*    showSection('profile');*/}
+                    {/*}}/>*/}
                     <NavigationButton src='/images/gamepad.svg' alt='games' padding={6} onClick={() => {
                         showSection('games');
                     }}/>
-                    <NavigationButton src='/images/threeDots.svg' alt='other' padding={6} onClick={() => {
-                        showSection('other');
+                    {/*<NavigationButton src='/images/threeDots.svg' alt='other' padding={6} onClick={() => {*/}
+                    {/*    showSection('other');*/}
+                    {/*}}/>*/}
+                    <NavigationButton className='widthTen' src='/images/duty.svg' alt='duty' padding={6} onClick={() => {
+                        showSection('duty')
                     }}/>
                 </Burger>
             </div>
@@ -91,11 +94,11 @@ const App = () => {
                         }}/>
                     </>
                 )}
-                <NavigationButton className='widthTen' src='/images/duty.svg' alt='duty' padding={2} onClick={() => {
-                    showSection('duty')
-                }}/>
                 <NavigationButton src='/images/settings.svg' alt='settings' padding={2} onClick={() => {
                     showSection('settings')
+                }}/>
+                <NavigationButton src='/images/profile.svg' alt='profile' padding={2} onClick={() => {
+                    showSection('profile');
                 }}/>
                 <NavigationButton src='/images/burger.svg' alt='burger' padding={2} onClick={() => {
                     showBurger(!visibleBurger)
