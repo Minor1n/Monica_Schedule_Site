@@ -10,7 +10,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    height: 100vh;
     background-color: rgba(255, 255, 255, 0.1);
     width: fit-content;
 }
@@ -42,11 +41,9 @@ body:before {
 }
 table {
     padding: 1vw;
-    /*min-width: 100vw;*/
     width: 100%;
 }
 td {
-    background-color: #1E1E1E;
     background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
     height: 3.5vw;
@@ -178,8 +175,8 @@ form {
 }
 
 .spinner {
-    width: 90px;
-    height: 90px;
+    width: 40px;
+    height: 40px;
     border: 4px solid rgba(196, 196, 196, 0.1);
     border-top: 4px solid #ffffff;
     border-radius: 50%;
