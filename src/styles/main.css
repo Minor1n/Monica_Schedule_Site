@@ -41,6 +41,7 @@ body:before {
 }
 table {
     padding: 1vw;
+    min-width: 100vw;
     width: 100%;
 }
 td {
