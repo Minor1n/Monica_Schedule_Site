@@ -4,7 +4,7 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    height: 150px;
+    height: 15vw;
     font-family: Unbounded-Bold, serif;
     top: 0;
     position: fixed;
@@ -20,11 +20,12 @@
 
 .header-img img{
     height: auto;
+    width: 20vw;
 }
 
 .header-title{
     margin: auto;
-    font-size: 40px;
+    font-size: 5vw;
     text-align: center;
 }
 
@@ -36,13 +37,14 @@
 .header-developers p{
     margin: 0;
     width: auto;
+    font-size: 1.5vw;
 }
 /*.header div{*/
 /*    width: auto;*/
 /*}*/
 
 .header-buffer{
-    height: 150px;
+    height: 15vw;
 }
 
 /*@media (max-width: 768px) {*/
