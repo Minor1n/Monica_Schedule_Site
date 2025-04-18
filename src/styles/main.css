@@ -173,7 +173,7 @@ form {
     height: 100vh;
     min-width: 100vw;
     width: 100%;
-    background-image: url("/images/art_on_the_beach.png");
+    background-image: url("/public/images/art_on_the_beach.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
