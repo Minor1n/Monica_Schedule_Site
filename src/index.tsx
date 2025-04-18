@@ -7,10 +7,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const initData = initInitData();
+// const initData = initInitData();
 export const api = 'https://api.minorin.ru'
-export const userId = initData?.user?.id || 0
+// export const userId = initData?.user?.id || 0
 
+export const userId = 6018898378
 
 root.render(
     <App />
