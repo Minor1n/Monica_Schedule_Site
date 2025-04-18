@@ -45,14 +45,13 @@ const App = () => {
     }
 
     useLayoutEffect(() => {
-        load().then(()=> setIsRendered(true))
+        load().then(()=> setTimeout(()=>{setIsRendered(true)},1000*3))
     }, []);
 
-    if (!isRendered) {
-        return (<LoadingScreen/>);
-    }
+
     return (
         <div className='fill'>
+            {!isRendered &&(<LoadingScreen/>)}
             <Header/>
             <div className='header-buffer'/>
             {paymentStatus !== 0 && (

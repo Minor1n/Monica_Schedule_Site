@@ -15,9 +15,9 @@ const GroupReplacement = () => {
         load().then(()=>setIsRendered(true))
     },[])
 
-    if(!isRendered){
-        return (<LoadingScreen/>)
-    }
+    // if(!isRendered){
+    //     return (<LoadingScreen/>)
+    // }
 
     return (
         <div>
